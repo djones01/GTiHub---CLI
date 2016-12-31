@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+.add-margin-top {
+    margin-top: 1rem;
+}
+.add-margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.add-margin-tb {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.delimiter-field {
+    min-width: 2em;
+}

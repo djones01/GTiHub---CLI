@@ -1,0 +1,16 @@
+<p-panel header="Extract Fields" [toggleable]="true">
+    <h5>1 - Set Input File Delimiter</h5>
+    <hr>
+    <div class="form-group row">
+      <div class="col-xs-1">
+         <label for="delimiter">Delimiter</label>
+        <input type="text" name="delimiter" [(ngModel)]="delimiter" maxlength="1" size="1" width="1" class="form-control delimiter-field" /> 
+      </div>
+    </div>
+    <h5>2 - Provide Input File and Upload</h5>
+    <hr>
+    <div class="form-group">
+        <label for="templateFile">Select Template File</label>
+        <p-fileUpload name="file[]" url="/api/File/ExtractFields" [disabled]="delimiter == ''" (onUpload)="onFileUpload($event)"></p-fileUpload>
+    </div>
+</p-panel>

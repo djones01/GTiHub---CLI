@@ -7,7 +7,7 @@ import { UserEditComponent }  from './user-edit/user-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full'},
-  { path: 'list',    component: UserListComponent },
+  { path: 'list',    component: UserListComponent }
 ];
 
 @NgModule({

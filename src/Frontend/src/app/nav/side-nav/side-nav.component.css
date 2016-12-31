@@ -1,3 +1,31 @@
+/* Convert to a side nav */
+@media only screen and (min-width : 768px){
+    .main-nav {
+        height: 100%;
+        width: 80px;
+    }
+
+    .main-nav > .navbar {
+        text-align: center;
+    }
+
+    resize-sidebar-image {
+        width: 50px;
+        height: auto;
+        content:url(assets/images/grant-thornton-swirl-lg.png);
+    }
+
+    .add-margin-sidebar-image {
+        margin: 10px;
+    }
+
+    .navbar {
+        border-radius: 0px;
+        border-width: 0px;
+        height: 100%;
+    }
+}
+
 /* Keep the nav menu independent of scrolling and on top of other items */
 .main-nav {
     position: fixed;
@@ -7,10 +35,14 @@
     z-index: 1;
 }
 
-@media (min-width: 768px) {
-    /* On small screens, convert the nav menu to a vertical sidebar */
-    .main-nav {
-        height: 100%;
-        width: calc(25% - 20px);
-    }
+.display-inline > div {
+    display: inline-block;
+    margin-right: 10px;
 }
+
+.resize-sidebar-image {
+    width: 30px;
+    height: auto;
+    content:url(assets/images/grant-thornton-swirl-sm.png);
+}
+

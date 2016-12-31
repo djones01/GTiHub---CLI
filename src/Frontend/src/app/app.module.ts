@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
+// third party modules
+import { SidebarModule } from 'ng-sidebar';
+
 // feature modules
 import { NavModule } from './nav/nav.module';
 import { HomeModule } from './home/home.module';
@@ -24,7 +27,8 @@ import { DataService } from './shared/data.service';
     HttpModule,
     NavModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SidebarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

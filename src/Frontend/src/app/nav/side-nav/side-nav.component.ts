@@ -7,8 +7,13 @@ import { MenuItem } from "primeng/primeng";
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
+    private open: boolean = false;
 
-  private menuItems: MenuItem[]
+    private toggleSidebar() {
+        this.open = !this.open;
+    }
+
+    private menuItems: MenuItem[]
 
     ngOnInit() {
         this.menuItems = [
@@ -31,7 +36,8 @@ export class SideNavComponent implements OnInit {
                 items: [
                     {
                         label: "View All",
-                        icon: "fa-binoculars"
+                        icon: "fa-binoculars",
+                        routerLink: ["/source"]
                     },
                     {
                         label: "New",
@@ -77,7 +83,8 @@ export class SideNavComponent implements OnInit {
                         items: [
                             {
                                 label: "View All",
-                                icon: "fa-binoculars"
+                                icon: "fa-binoculars",
+                                routerLink: ["/client"]
                                 
                             },
                             {

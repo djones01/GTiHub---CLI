@@ -9,6 +9,7 @@ import { UserListComponent } from './user-list/user-list.component';
 
 // third party modules
 import { TextMaskModule } from 'angular2-text-mask';
+import { DataTableModule, SharedModule, ButtonModule, DialogModule, ConfirmDialogModule, ConfirmationService, MultiSelectModule } from 'primeng/primeng';
 
 // services
 import { UserService } from './user.service';
@@ -16,12 +17,18 @@ import { UserService } from './user.service';
 @NgModule({
   imports: [
     CommonModule,
-    TextMaskModule,
     FormsModule,
     ReactiveFormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    TextMaskModule,
+    DataTableModule,
+    SharedModule,
+    ButtonModule,
+    DialogModule,
+    ConfirmDialogModule,
+    MultiSelectModule
   ],
   declarations: [UserEditComponent, UserListComponent],
-  providers: [UserService] 
+  providers: [UserService, ConfirmationService] 
 })
 export class UserModule { }
