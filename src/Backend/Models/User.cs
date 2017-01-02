@@ -18,10 +18,18 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Title { get; set; }
+        public UserRole Role { get; set; }
 
         public string Salt { get; set; }
         public string Hash { get; set; }
 
         public  ICollection<UserProjectSec> UserProjectSecs { get; set; }
+    }
+
+    public enum UserRole
+    {
+        Admin,
+        PM,
+        User
     }
 }

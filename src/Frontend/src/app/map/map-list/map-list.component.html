@@ -1,3 +1,28 @@
-<p>
-  map-list works!
-</p>
+<div class="container-fluid add-margin-top">
+    <h4>All Maps</h4>
+    <hr>
+    <p-dataTable [value]="maps" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [resizableColumns]="true" [responsive]="true"
+                 [stacked]="stacked" [(selection)]="selectedMaps"
+                 (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+        <header>
+            <div style="text-align:left">
+                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+            </div>
+        </header>
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [sortable]="true"></p-column>
+        <footer *ngIf="showFooterOptions">
+            <div class="ui-helper-clearfix" style="width:100%">
+                <div style="float:left">
+                    <button type="button" pButton icon="fa-plus" routerLink="/map/edit"  label="Add Map"></button>
+                    <button type="button" pButton icon="fa-remove" (click)="deleteMaps()" [disabled]="!canDelete" label="Delete Map(s)"></button>
+                    <button type="button" pButton icon="fa-edit" (click)="editMap()" [disabled]="!canEdit" label="Edit Map"></button>
+                </div>
+            </div>
+        </footer>
+    </p-dataTable>
+</div>
+<p-confirmDialog header="Confirm Deleting Map(s)" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+
+

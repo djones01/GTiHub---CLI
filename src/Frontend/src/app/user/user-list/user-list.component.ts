@@ -23,6 +23,7 @@ export class UserListComponent implements OnInit {
         { field: 'title', header: 'Title' },
         { field: 'phone', header: 'Phone' },
         { field: 'email', header: 'Email' },
+        { field: 'role', header: 'Role' },
         { field: 'created_By', header: 'Created By' },
         { field: 'creation_Date', header: 'Creation Date' },
         { field: 'modified_By', header: 'Modified By' },

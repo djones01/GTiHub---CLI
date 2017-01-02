@@ -1,0 +1,46 @@
+<div class="container-fluid add-margin-top">
+  <h4>Add / Edit Targets</h4>
+  <hr>
+  <form [formGroup]="srcForm" novalidate (ngSubmit)="onSubmit(srcForm.value)">
+      <p-panel header="Target Options" [toggleable]="true">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <small *ngIf="!srcForm.controls.name.valid" class="text-danger">
+                        Name is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control textarea-resize" formControlName="description"></textarea>
+                    <small *ngIf="!srcForm.controls.description.valid" class="text-danger">
+                        Description is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Effective Date</label>
+                    <p-calendar formControlName="effective_Date"></p-calendar>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label for="active">
+                            <input type="checkbox" formControlName="active">Active
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </p-panel>
+      <hr>
+      <target-field-edit [group]="srcForm"></target-field-edit>  
+      <hr>
+      <button type="button" class="btn btn-default" (click)="back()">Back to Overview</button>
+      <button type="button" class="btn btn-default" (click)="newTarget()"><span class="glyphicon glyphicon-repeat"></span> Clear</button>
+      <button type="submit" class="btn btn-primary" [disabled]="srcForm.controls.targetFields.controls.length == 0  || !srcForm.valid" 
+            (click)="onSubmit(srcForm.value)">
+            <span class="glyphicon glyphicon-plus"></span> Submit</button>
+    </form> 
+<div>
+

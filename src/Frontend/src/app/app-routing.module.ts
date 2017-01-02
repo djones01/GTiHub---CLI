@@ -8,7 +8,8 @@ export const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: 'user', loadChildren: 'app/user/user.module#UserModule' },
   { path: 'client', loadChildren: 'app/client/client.module#ClientModule' },
-  { path: 'source', loadChildren: 'app/source/source.module#SourceModule' }
+  { path: 'source', loadChildren: 'app/source/source.module#SourceModule' },
+  { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }
 ];
 
 @NgModule({

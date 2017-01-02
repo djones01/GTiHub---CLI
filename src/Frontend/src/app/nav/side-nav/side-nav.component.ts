@@ -23,7 +23,8 @@ export class SideNavComponent implements OnInit {
                 items: [
                     {
                         label: "View All",
-                        icon: "fa-binoculars"
+                        icon: "fa-binoculars",
+                        routerLink: ["/project"]
                     },
                     {
                         label: "New",

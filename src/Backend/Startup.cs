@@ -59,7 +59,7 @@ namespace Backend
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            var connection = @"Server=DJ-PC;Database=ihubdb;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-DJA91SQ;Database=ihubdb;Trusted_Connection=True;";
             services.AddDbContext<GTiHubContext>(options => options.UseSqlServer(connection));
         }
 
