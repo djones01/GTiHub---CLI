@@ -10,8 +10,7 @@ import { FileHandlingModule } from '../file-handling/file-handling.module';
 import { TargetEditComponent } from './target-edit/target-edit.component';
 import { TargetListComponent } from './target-list/target-list.component';
 import { TargetFieldEditComponent } from './target-field-edit/target-field-edit.component';
-import { TargetDualSelectComponent } from './selection/target-dual-select/target-dual-select.component';
-import { TargetListSelectComponent } from './selection/target-list-select/target-list-select.component';
+import { TargetFieldSelectComponent } from './selection/target-field-select/target-field-select.component';
 
 // third party modules
 import { 
@@ -50,13 +49,13 @@ import { TargetService } from './target.service';
     TargetEditComponent, 
     TargetListComponent, 
     TargetFieldEditComponent, 
-    TargetDualSelectComponent, 
-    TargetListSelectComponent
+    TargetFieldSelectComponent
     ],
   providers: [
     TargetService, 
     ConfirmationService
     ],
-  exports: [TargetListComponent]
+  exports: [TargetListComponent,
+  TargetFieldSelectComponent]
 })
 export class TargetModule { }

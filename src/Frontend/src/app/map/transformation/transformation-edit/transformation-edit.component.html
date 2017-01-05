@@ -1,3 +1,32 @@
-<p>
-  transformation-edit works!
-</p>
+<div [formGroup]="transForm">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" formControlName="description" />
+                <small [hidden]="transForm.controls.description.valid" class="text-danger">
+                    Description is required
+                </small>
+            </div>
+        </div>     
+    </div>
+    <hr />
+    <rule-edit [group]="transForm.controls.rule" [i]="i"></rule-edit>
+    <hr />
+    <div formArrayName="conditions">
+        <p-panel *ngIf="transForm.controls.conditions.length > 0" header="Conditions" [toggleable]="true">
+            <div *ngFor="let condition of transForm.controls.conditions.controls; let i=index">
+                <div class="row">
+                    <div class="col-md-11">
+                        <condition-edit [group]="transForm.controls.conditions.controls[i]"></condition-edit>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-default" (click)="removeCondition(i)"><span class="fa fa-trash-o"></span></button>
+                    </div>          
+                </div>                        
+            </div>  
+        </p-panel>
+    </div>
+    <hr *ngIf="transForm.controls.conditions.length > 0" />
+    <button type="button" class="btn btn-default" (click)="addCondition()"><span class="fa fa-plus"></span> Add Condition</button>
+</div>

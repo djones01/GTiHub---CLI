@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Rx";
-import { DataService } from "../shared/data.service";
+import { DataService } from "../shared/data/data.module";
 import { Project } from "./project";
 
 @Injectable()

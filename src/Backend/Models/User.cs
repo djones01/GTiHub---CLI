@@ -10,6 +10,8 @@
 
     public class User : BaseEntity
     {
+        public User() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }

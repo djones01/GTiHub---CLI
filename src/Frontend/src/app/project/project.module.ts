@@ -6,6 +6,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 // feature modules
 import { SourceModule } from '../source/source.module';
 import { TargetModule } from '../target/target.module';
+import { MapModule } from '../map/map.module';
 
 // components
 import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
@@ -37,6 +38,7 @@ import { ProjectService } from './project.service';
     ProjectRoutingModule,
     SourceModule,
     TargetModule,
+    MapModule,
     DataTableModule, 
     SharedModule, 
     ButtonModule, 

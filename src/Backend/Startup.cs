@@ -75,6 +75,7 @@ namespace Backend
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.Use(async (context, next) =>
             {
                 await next();

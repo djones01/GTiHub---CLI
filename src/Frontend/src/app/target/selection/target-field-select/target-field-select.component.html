@@ -1,0 +1,23 @@
+<div class="input-group">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="showSelectDialog(content)"><span class="fa fa-search"></span></button>
+    </span>
+    <label *ngIf="selectedTargetField != null" class="form-control hide-overflow">{{selectedTargetField.name}}</label>
+    <label *ngIf="selectedTargetField == null" class="form-control hide-overflow">Target Field</label>
+</div>
+
+<p-dialog header="Select a Target Field" [modal]="true" [responsive]="true" [(visible)]="showDialog">
+    <p-dataTable [value]="targets" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [resizableColumns]="true" [responsive]="true"
+                 [stacked]="stacked" [(selection)]="selectedTarget"
+                 (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+        <header>
+            <div style="text-align:left">
+                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+            </div>
+        </header>
+        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [sortable]="true"></p-column>
+    </p-dataTable>
+</p-dialog>
+
+

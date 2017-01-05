@@ -1,3 +1,9 @@
-<p>
-  field-format works!
-</p>
+<div *ngIf="fieldDataType=='date'">
+    <button type="button" class="btn btn-default" (click)="showEditingDialog()"><span class="fa fa-pencil"></span> Custom Date Format</button>
+</div>
+<p-dialog header="Select Field Format" [modal]="true" [responsive]="true" [(visible)]="showDialog">
+    <!--Date Editing-->
+    <div *ngIf="fieldDataType=='date'" class="container-fluid">
+        <date-format></date-format>
+    </div>
+</p-dialog>

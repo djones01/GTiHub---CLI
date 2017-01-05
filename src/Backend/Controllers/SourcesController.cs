@@ -54,7 +54,8 @@
         [HttpGet("GetSourceFieldsbySource/{id}")]
         public IEnumerable<SourceField> GetSourceFieldsBySource(int id)
         {
-            return this._dbContext.SourceFields.Where(x => x.SourceId == id).OrderBy(x => x.SeqNum).ToList();
+            var sourceFields = this._dbContext.SourceFields.Where(x => x.SourceId == id).OrderBy(x => x.SeqNum).ToList();
+            return sourceFields;
         }
 
         // POST api/Sources

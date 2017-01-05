@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Map, IMap } from "../map";
-import { DataService } from "../../shared/data.service";
+import { DataService } from "../../shared/data/data.module";
 import { Router } from "@angular/router";
 
 @Injectable()

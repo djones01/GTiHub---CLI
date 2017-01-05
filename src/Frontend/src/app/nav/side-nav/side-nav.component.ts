@@ -24,7 +24,7 @@ export class SideNavComponent implements OnInit {
                     {
                         label: "View All",
                         icon: "fa-binoculars",
-                        routerLink: ["/project"]
+                        routerLink: ["/pages/project"]
                     },
                     {
                         label: "New",
@@ -38,7 +38,7 @@ export class SideNavComponent implements OnInit {
                     {
                         label: "View All",
                         icon: "fa-binoculars",
-                        routerLink: ["/source"]
+                        routerLink: ["/pages/source"]
                     },
                     {
                         label: "New",
@@ -60,6 +60,21 @@ export class SideNavComponent implements OnInit {
                 ]
             },
             {
+                label: "Maps",
+                items: [
+                    {
+                        label: "View All",
+                        icon: "fa-binoculars",
+                        routerLink: ["/pages/map"]
+                    },
+                    {
+                        label: "New",
+                        icon: "fa-plus",
+                        routerLink: ["/pages/map/edit"]
+                    }
+                ]
+            },
+            {
                 label: "Admin Tools",
                 icon: "fa-cog",
                 items: [
@@ -70,7 +85,7 @@ export class SideNavComponent implements OnInit {
                             {
                                 label: "View All",
                                 icon: "fa-binoculars",
-                                routerLink: ["/user"]
+                                routerLink: ["/pages/user"]
                             },
                             {
                                 label: "New",
@@ -85,7 +100,7 @@ export class SideNavComponent implements OnInit {
                             {
                                 label: "View All",
                                 icon: "fa-binoculars",
-                                routerLink: ["/client"]
+                                routerLink: ["/pages/client"]
                                 
                             },
                             {

@@ -14,7 +14,7 @@
         <footer *ngIf="showFooterOptions">
             <div class="ui-helper-clearfix" style="width:100%">
                 <div style="float:left">
-                    <button type="button" pButton icon="fa-plus" routerLink="/map/edit"  label="Add Map"></button>
+                    <button type="button" pButton icon="fa-plus" routerLink="/pages/map/edit"  label="Add Map"></button>
                     <button type="button" pButton icon="fa-remove" (click)="deleteMaps()" [disabled]="!canDelete" label="Delete Map(s)"></button>
                     <button type="button" pButton icon="fa-edit" (click)="editMap()" [disabled]="!canEdit" label="Edit Map"></button>
                 </div>

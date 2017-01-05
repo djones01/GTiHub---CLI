@@ -12,7 +12,7 @@
     </label>
   </div>
   <div *ngIf="!sopt" class="form-group">
-      <button type="button" class="btn btn-default" (click)="addSrcFld()"><span class="glyphicon glyphicon-plus"></span>Add Source Field</button>
+      <button type="button" class="btn btn-default" (click)="addSrcFld()"><span class="fa fa-plus"></span> Add Source Field</button>
   </div>
   <div *ngIf="sopt">
       <field-extractor (onExtracted)="setSourceFields($event)"></field-extractor>
@@ -62,7 +62,7 @@
                         <input type="checkbox" formControlName="active" />
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-default" (click)="removeSrcFld(i)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                        <button class="btn btn-default" (click)="removeSrcFld(i)"><span class="fa fa-trash-o"></span> Delete</button>
                     </div>
                 </div>                       
             </li>

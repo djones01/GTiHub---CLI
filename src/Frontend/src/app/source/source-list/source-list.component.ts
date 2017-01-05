@@ -12,7 +12,7 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   outputs: ['onSelectedSourcesChange']
 })
 export class SourceListComponent implements OnInit {
-    public howFooterOptions: boolean = true;
+    public showFooterOptions: boolean = true;
     public onSelectedSourcesChange = new EventEmitter();
     private showDialog = false;
     private canDelete = false;

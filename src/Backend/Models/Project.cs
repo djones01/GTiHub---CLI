@@ -10,6 +10,8 @@
 
     public class Project : BaseEntity
     {
+        public Project() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjectId { get; set; }

@@ -11,6 +11,8 @@
 
     public class Target : BaseEntity
     {
+        public Target() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TargetId { get; set; }

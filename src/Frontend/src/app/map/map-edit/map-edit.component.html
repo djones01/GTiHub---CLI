@@ -1,3 +1,42 @@
-<p>
-  map-edit works!
-</p>
+<div class="container-fluid add-margin-top">
+    <h4>Add / Edit Maps</h4>
+    <hr />
+    <form [formGroup]="mapForm" novalidate (ngSubmit)="onSubmit(mapForm.value)">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" formControlName="description" />
+                    <small *ngIf="!mapForm.controls.description.valid" class="text-danger">
+                        Description is required
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label>Effective Date</label>
+                    <input class="form-control" type="date" formControlName="effective_Date" />
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" formControlName="active">
+                    Active
+                    </label>
+                </div>
+            </div>  
+        </div>  
+        <button type="button" class="btn btn-default" (click)="addTransform()"><span class="fa fa-plus"></span> Add Transformation</button>
+        <hr />
+        <div >    
+            <p-panel formArrayName="transformations" *ngFor="let transformation of mapForm.controls.transformations?.controls; let i=index" [toggleable]="true">
+                <header style="display: inline-block;">           
+                    <span class="fa fa-close ui-panel-titlebar-toggler" (click)="removeTransform(i)"></span>  
+                    <span class="ui-panel-title">Transformation {{i+1}}</span>                                
+                </header>
+                <transformation-edit [group]="mapForm.controls.transformations.controls[i]" [i]="i"></transformation-edit>
+            </p-panel>           
+        </div>
+        <hr *ngIf="mapForm.controls.transformations.length > 0"/>
+        <button type="button" class="btn btn-default" (click)="initMapForm()"><span class="fa fa-eraser"></span> Reset Map</button>      
+        <button type="submit" class="btn btn-primary" [disabled]="!mapForm.valid">Submit</button>     
+    </form>
+</div>
+<p-confirmDialog header="Confirm Deleting Transformation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

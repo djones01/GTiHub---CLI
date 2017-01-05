@@ -14,7 +14,7 @@
         <footer *ngIf="showFooterOptions">
             <div class="ui-helper-clearfix" style="width:100%">
                 <div style="float:left">
-                    <button type="button" pButton icon="fa-plus" routerLink="/source/edit"  label="Add Source"></button>
+                    <button type="button" pButton icon="fa-plus" routerLink="/pages/source/edit"  label="Add Source"></button>
                     <button type="button" pButton icon="fa-remove" (click)="deleteSources()" [disabled]="!canDelete" label="Delete Source(s)"></button>
                     <button type="button" pButton icon="fa-edit" (click)="editSource()" [disabled]="!canEdit" label="Edit Source"></button>
                 </div>

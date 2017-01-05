@@ -1,0 +1,44 @@
+<div class="input-group">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="showSelectDialog(content)"><span class="fa fa-search"></span></button>
+    </span>
+    <label *ngIf="selectedSourceField != null" class="form-control hide-overflow">{{selectedSourceField.name}}</label>
+    <label *ngIf="selectedSourceField == null" class="form-control hide-overflow">Source Field</label>
+</div>
+
+<p-dialog header="Select a Source Field" [modal]="true" responsive="true" width="800" [(visible)]="showDialog">
+    <p-dataTable [value]="sources" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" expandableRows="true" 
+                 [resizableColumns]="true" [responsive]="true"
+                 [stacked]="stacked"
+                 (onRowExpand)="rowExpanded($event)">
+        <header>
+            <div style="text-align:left">
+                <p-multiSelect [options]="sourceColumnOptions" [(ngModel)]="sourceCols"></p-multiSelect>
+            </div>
+        </header>
+        <p-column expander="true" styleClass="col-icon"></p-column>
+        <p-column *ngFor="let sourceCol of sourceCols" [field]="sourceCol.field" [header]="sourceCol.header" [sortable]="true"></p-column>
+        <template let-expandedSource pTemplate="rowexpansion">
+            <div class="ui-grid ui-grid-responsive ui-fluid" style="padding:20px">
+                <div class="ui-grid-row">            
+                    <p-dataTable [value]="expandedSource.sourceFields" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" 
+                                [resizableColumns]="true" [responsive]="true"
+                                [stacked]="stacked" [(selection)]="selectedSourceField"
+                                (onRowExpand)="rowExpanded($event)">
+                        <header>
+                            <div style="text-align:left">
+                                <p-multiSelect [options]="sourceFieldColumnOptions" [(ngModel)]="sourceFieldCols"></p-multiSelect>
+                            </div>
+                        </header>
+                        <p-column [style]="{'width':'38px'}" selectionMode="single"></p-column>
+                        <p-column *ngIf="loading && expandedSource.sourceFields == null">
+                            <loading-dots></loading-dots>
+                        </p-column>
+                        <p-column *ngFor="let sourceFieldCol of sourceFieldCols" [field]="sourceFieldCol.field" [header]="sourceFieldCol.header" [sortable]="true"></p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+        </template>
+    </p-dataTable>
+</p-dialog>
+

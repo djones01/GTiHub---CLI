@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
-import { DataService } from "../../shared/data.service";
-import { FileUploadService } from "../../shared/file-upload.service";
+import { DataService, FileUploadService } from "../../shared/data/data.module";
 import { FilePackage } from "../../map/map-run/filepackage";
 import { Map } from "../../map/map";
 

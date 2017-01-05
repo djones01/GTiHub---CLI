@@ -36,11 +36,8 @@
       <hr>
       <source-field-edit [group]="srcForm"></source-field-edit>  
       <hr>
-      <button type="button" class="btn btn-default" (click)="back()">Back to Overview</button>
-      <button type="button" class="btn btn-default" (click)="newSource()"><span class="glyphicon glyphicon-repeat"></span> Clear</button>
-      <button type="submit" class="btn btn-primary" [disabled]="srcForm.controls.sourceFields.controls.length == 0  || !srcForm.valid" 
-            (click)="onSubmit(srcForm.value)">
-            <span class="glyphicon glyphicon-plus"></span> Submit</button>
+      <button type="button" class="btn btn-default" (click)="newSource()"><span class="fa fa-eraser"></span> Clear</button>
+      <button type="submit" class="btn btn-primary" [disabled]="srcForm.controls.sourceFields.controls.length == 0  || !srcForm.valid">Submit</button>
     </form> 
 <div>
 

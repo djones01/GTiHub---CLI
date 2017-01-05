@@ -9,6 +9,8 @@
 
     public class Condition : BaseEntity
     {
+        public Condition() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ConditionId { get; set; }

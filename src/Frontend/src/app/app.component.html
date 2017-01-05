@@ -1,10 +1,6 @@
-<div class='container-fluid full-height'>
-    <div class='row'>
-        <div class="col-md-1">
-            <side-nav></side-nav>
-        </div>
-        <div class='col-md-11 body-content'>
-            <router-outlet></router-outlet>
-        </div>
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+    <div *ngIf="loading" class="center-container">
+        <loading-dots></loading-dots>
     </div>
 </div>

@@ -11,6 +11,8 @@
 
     public class Source : BaseEntity
     {
+        public Source() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SourceId { get; set; }

@@ -5,13 +5,13 @@ import { SourceRoutingModule } from './source-routing.module';
 
 // feature modules
 import { FileHandlingModule } from '../file-handling/file-handling.module';
+import { UiModule } from '../shared/ui/ui.module';
 
 // components
 import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceListComponent } from './source-list/source-list.component';
 import { SourceFieldEditComponent } from './source-field-edit/source-field-edit.component';
-import { SourceDualSelectComponent } from './selection/source-dual-select/source-dual-select.component';
-import { SourceListSelectComponent } from './selection/source-list-select/source-list-select.component';
+import { SourceFieldSelectComponent } from './selection/source-field-select/source-field-select.component';
 
 // third party modules
 import { 
@@ -23,8 +23,7 @@ import {
   ConfirmationService, 
   MultiSelectModule, 
   PanelModule, 
-  CalendarModule,
-  PickListModule } from 'primeng/primeng';
+  CalendarModule} from 'primeng/primeng';
 
 // services
 import { SourceService } from './source.service';
@@ -35,6 +34,7 @@ import { SourceService } from './source.service';
     FormsModule,
     ReactiveFormsModule,
     SourceRoutingModule,
+    UiModule,
     FileHandlingModule,
     DataTableModule,
     SharedModule,
@@ -43,20 +43,19 @@ import { SourceService } from './source.service';
     ConfirmDialogModule,
     MultiSelectModule,
     PanelModule,
-    CalendarModule,
-    PickListModule
+    CalendarModule
   ],
   declarations: [
     SourceEditComponent, 
     SourceListComponent, 
     SourceFieldEditComponent, 
-    SourceDualSelectComponent, 
-    SourceListSelectComponent
+    SourceFieldSelectComponent
     ],
   providers: [
     SourceService, 
     ConfirmationService
     ],
-  exports: [SourceListComponent]
+  exports: [SourceListComponent,
+  SourceFieldSelectComponent]
 })
 export class SourceModule { }

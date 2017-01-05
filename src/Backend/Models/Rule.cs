@@ -10,6 +10,8 @@
 
     public class Rule : BaseEntity
     {
+        public Rule() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RuleId { get; set; }

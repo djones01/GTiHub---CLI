@@ -10,6 +10,8 @@
 
     public class Client : BaseEntity
     {
+        public Client(){}
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ClientId { get; set; }

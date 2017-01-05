@@ -10,6 +10,8 @@
 
     public class Transformation : BaseEntity
     {
+        public Transformation() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransformationId { get; set; }      

@@ -10,6 +10,8 @@
 
     public class UserProjectSec : BaseEntity
     {
+        public UserProjectSec() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserProjSecId { get; set; }

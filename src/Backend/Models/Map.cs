@@ -11,6 +11,8 @@
 
     public class Map : BaseEntity
     {
+        public Map() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MapId { get; set; }

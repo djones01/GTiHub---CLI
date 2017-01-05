@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { SourceFieldEditComponent } from "../source-field-edit/source-field-edit.component";
 import { SourceService } from "../source.service";
 import { Source } from "../source";
@@ -42,12 +41,7 @@ public srcForm: FormGroup;
         this.initSrcForm();
     }
 
-    back() {
-        this.sourceService.clearEditSource();
-        this.router.navigateByUrl('/source/list');
-    }
-
-    constructor(private _fb: FormBuilder, private router: Router, private sourceService: SourceService) { }
+    constructor(private _fb: FormBuilder, private sourceService: SourceService) { }
 
     ngOnInit() {
         this.initSrcForm();

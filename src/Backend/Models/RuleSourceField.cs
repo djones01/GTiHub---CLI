@@ -9,6 +9,8 @@
 
     public class RuleSourceField : BaseEntity
     {
+        public RuleSourceField() { }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RuleSourceFieldId { get; set; }

@@ -12,7 +12,7 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   outputs: ['onSelectedMapsChange']
 })
 export class MapListComponent implements OnInit {
-    public howFooterOptions: boolean = true;
+    public showFooterOptions: boolean = true;
     public onSelectedMapsChange = new EventEmitter();
     private showDialog = false;
     private canDelete = false;
@@ -33,7 +33,7 @@ export class MapListComponent implements OnInit {
 
     editMap() {
         this.mapService.setEditMap(this.selectedMaps[0]);
-        this.router.navigateByUrl('/edit');
+        this.router.navigate(['../edit']);
     }
 
     deleteMaps() {

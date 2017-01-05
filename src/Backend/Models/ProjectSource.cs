@@ -2,12 +2,11 @@
 {
     public class ProjectSource : BaseEntity
     {
+        public ProjectSource() { }
+
         public  Project Project { get; set; }
-
         public int ProjectId { get; set; }
-
         public  Source Source { get; set; }
-
         public int SourceId { get; set; }
     }
 }

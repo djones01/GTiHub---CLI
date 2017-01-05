@@ -36,11 +36,10 @@
       <hr>
       <target-field-edit [group]="srcForm"></target-field-edit>  
       <hr>
-      <button type="button" class="btn btn-default" (click)="back()">Back to Overview</button>
-      <button type="button" class="btn btn-default" (click)="newTarget()"><span class="glyphicon glyphicon-repeat"></span> Clear</button>
+      <button type="button" class="btn btn-default" (click)="newTarget()"><span class="fa fa-eraser"></span> Clear</button>
       <button type="submit" class="btn btn-primary" [disabled]="srcForm.controls.targetFields.controls.length == 0  || !srcForm.valid" 
             (click)="onSubmit(srcForm.value)">
-            <span class="glyphicon glyphicon-plus"></span> Submit</button>
+            Submit</button>
     </form> 
 <div>
 

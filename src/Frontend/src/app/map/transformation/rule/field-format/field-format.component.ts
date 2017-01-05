@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DateFormatComponent } from "../date-format/date-format.component";
 
 @Component({
-  selector: 'app-field-format',
+  selector: 'field-format',
   templateUrl: './field-format.component.html',
   styleUrls: ['./field-format.component.css']
 })
 export class FieldFormatComponent implements OnInit {
+    @Input()
+    fieldDataType: string;
 
-  constructor() { }
+    private showDialog = false;
 
-  ngOnInit() {
-  }
+    //Modal Functions
+    showEditingDialog(content) {
+        this.showDialog = !this.showDialog;
+    }
+
+    constructor() {}
+
+    ngOnInit() {}
+
 
 }
