@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserAuthService } from '../shared/auth/auth.module';
 import { AlertService } from '../shared/alert/alert.module';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.loginForm = this.fb.group({
-            'email' : [null, Validators.required],
+            'email' : [null, Validators.compose([Validators.required, CustomValidators.email])],
             'password': [null, Validators.required]
         })
     }
