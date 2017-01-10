@@ -13,6 +13,9 @@ export class AlertComponent implements OnInit {
   constructor(private alertService: AlertService) { }
  
   ngOnInit() {
-      this.alertService.message.subscribe(message => this.messages.push(message));
+      this.alertService.message.subscribe(message => {
+        if(message)
+          this.messages.push(message)
+      });
   }
 }

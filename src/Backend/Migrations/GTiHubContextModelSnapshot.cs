@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using GTiHub.Models.EntityModel;
+using Backend.Models.EntityModels;
 
 namespace Backend.Migrations
 {
@@ -15,6 +15,78 @@ namespace Backend.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("GTiHub.Models.EntityModel.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<int?>("ClientId");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Created_By");
+
+                    b.Property<DateTime?>("Creation_Date");
+
+                    b.Property<DateTime?>("Date_Modified");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Modified_By");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("Title");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
 
             modelBuilder.Entity("GTiHub.Models.EntityModel.Client", b =>
                 {
@@ -33,6 +105,10 @@ namespace Backend.Migrations
                     b.Property<string>("Modified_By");
 
                     b.Property<string>("Name");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("ClientId");
 
@@ -69,6 +145,10 @@ namespace Backend.Migrations
 
                     b.Property<int>("TransformationId");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("ConditionId");
 
                     b.HasIndex("SourceFieldId");
@@ -98,6 +178,10 @@ namespace Backend.Migrations
 
                     b.Property<string>("Modified_By");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("MapId");
 
                     b.ToTable("Maps");
@@ -125,6 +209,10 @@ namespace Backend.Migrations
 
                     b.Property<string>("Project_Type");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("ProjectId");
 
                     b.HasIndex("ClientId");
@@ -145,6 +233,10 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("Date_Modified");
 
                     b.Property<string>("Modified_By");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("ProjectId", "MapId");
 
@@ -167,6 +259,10 @@ namespace Backend.Migrations
 
                     b.Property<string>("Modified_By");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("ProjectId", "SourceId");
 
                     b.HasIndex("SourceId");
@@ -187,6 +283,10 @@ namespace Backend.Migrations
                     b.Property<DateTime?>("Date_Modified");
 
                     b.Property<string>("Modified_By");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("ProjectId", "TargetId");
 
@@ -218,6 +318,10 @@ namespace Backend.Migrations
                     b.Property<int>("TargetFieldId");
 
                     b.Property<int>("TransformationId");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("RuleId");
 
@@ -255,6 +359,10 @@ namespace Backend.Migrations
 
                     b.Property<int>("SourceFieldId");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("RuleSourceFieldId");
 
                     b.HasIndex("RuleId");
@@ -286,6 +394,10 @@ namespace Backend.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("SourceId");
 
                     b.ToTable("Sources");
@@ -314,6 +426,10 @@ namespace Backend.Migrations
                     b.Property<int>("SeqNum");
 
                     b.Property<int>("SourceId");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("SourceFieldId");
 
@@ -344,6 +460,10 @@ namespace Backend.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("TargetId");
 
                     b.ToTable("Targets");
@@ -373,6 +493,10 @@ namespace Backend.Migrations
 
                     b.Property<int>("TargetId");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("TargetFieldId");
 
                     b.HasIndex("TargetId");
@@ -398,50 +522,15 @@ namespace Backend.Migrations
 
                     b.Property<string>("Modified_By");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("TransformationId");
 
                     b.HasIndex("MapId");
 
                     b.ToTable("Transformations");
-                });
-
-            modelBuilder.Entity("GTiHub.Models.EntityModel.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClientId");
-
-                    b.Property<string>("Created_By");
-
-                    b.Property<DateTime?>("Creation_Date");
-
-                    b.Property<DateTime?>("Date_Modified");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("Hash");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Modified_By");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<int>("Role");
-
-                    b.Property<string>("Salt");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("GTiHub.Models.EntityModel.UserProjectSec", b =>
@@ -468,13 +557,133 @@ namespace Backend.Migrations
 
                     b.Property<int>("UserId");
 
+                    b.Property<string>("UserId1");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
                     b.HasKey("UserProjSecId");
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UserProjectSecs");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("GTiHub.Models.EntityModel.ApplicationUser", b =>
+                {
+                    b.HasOne("GTiHub.Models.EntityModel.Client")
+                        .WithMany("Users")
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("GTiHub.Models.EntityModel.Condition", b =>
@@ -587,13 +796,6 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.User", b =>
-                {
-                    b.HasOne("GTiHub.Models.EntityModel.Client")
-                        .WithMany("Users")
-                        .HasForeignKey("ClientId");
-                });
-
             modelBuilder.Entity("GTiHub.Models.EntityModel.UserProjectSec", b =>
                 {
                     b.HasOne("GTiHub.Models.EntityModel.Project", "Project")
@@ -601,8 +803,44 @@ namespace Backend.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.User", "User")
+                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser", "User")
                         .WithMany("UserProjectSecs")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
+                        .WithMany("Claims")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                        .WithMany("Logins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

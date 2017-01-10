@@ -29,21 +29,20 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.loginForm = this.fb.group({
-            'email' : [null, Validators.compose([Validators.required, CustomValidators.email])],
+            'username' : [null, Validators.compose([Validators.required, CustomValidators.email])],
             'password': [null, Validators.required]
         })
     }
 
     submitForm() {
-        this.loading = true;
-        /*this.userAuthService.login(this.model.username, this.model.password)
+        this.userAuthService.login(this.loginForm.value)
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error("Error occurred during login", error);
                     this.loading = false;
-                });*/
+                });
     }
 }

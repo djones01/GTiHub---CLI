@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Rx';
 import { DataService } from '../shared/data/data.module';
 import { User } from './user';
+import { UserAuthService } from '../shared/auth/auth.module';
 
 @Injectable()
 export class UserService {
@@ -34,7 +35,7 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     }
 
     newUser() {
-        return new User('', '', '', '', '');
+        return new User('', '', '', []);
     }
 
     submit(user: User) {
@@ -48,16 +49,16 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     }
 
     add(user: User) {
-        this._dataService.Add('Users', user).subscribe(user => {
+        this.userAuthService.register(user).subscribe(user => {
             this.dataStore.users.push(user);
             this._users.next(this.dataStore.users);
         }, error => console.log(error));
     }
 
     update(user: User) {
-        this._dataService.Update('Users', user.userId, user).subscribe((user: User) => {
+        this._dataService.Update('Users', user.id, user).subscribe((user: User) => {
             this.dataStore.users.forEach((m, i) => {
-                if (m.userId === user.userId) { this.dataStore.users[i] = user; }
+                if (m.id === user.id) { this.dataStore.users[i] = user; }
             });
             this._users.next(this.dataStore.users);
         }, error => console.log(error));
@@ -66,13 +67,13 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     delete(userId: number) {
         this._dataService.Delete('Users', userId).subscribe(response => {
             this.dataStore.users.forEach((m, i) => {
-                if (m.userId === userId) { this.dataStore.users.splice(i, 1); }
+                if (m.id === userId) { this.dataStore.users.splice(i, 1); }
             });
             this._users.next(this.dataStore.users);
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService) {
+    constructor(private _dataService: DataService, private userAuthService: UserAuthService) {
         this.initEditUser();
         this.dataStore = { users: [] };
         // Get the list of users

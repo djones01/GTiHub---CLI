@@ -44,7 +44,7 @@ export class UserListComponent implements OnInit {
             message: "Are you sure that you wish to delete the selected user(s)?",
             accept: () => {
                 this.selectedUsers.forEach((c, i) => {
-                    this.userService.delete(c.userId);
+                    this.userService.delete(c.id);
                 });
                 this.selectedUsers = [];
             }

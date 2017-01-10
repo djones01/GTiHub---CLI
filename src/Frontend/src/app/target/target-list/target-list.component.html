@@ -1,6 +1,8 @@
 <div class="container-fluid add-margin-top">
-    <h4>All Targets</h4>
-    <hr>
+    <div *ngIf="showHeader">
+        <h4>All Targets</h4>
+        <hr>
+    </div>
     <p-dataTable [value]="targets" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [resizableColumns]="true" [responsive]="true"
                  [stacked]="stacked" [(selection)]="selectedTargets"
                  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">

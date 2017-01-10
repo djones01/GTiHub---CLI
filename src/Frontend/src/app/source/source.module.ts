@@ -5,7 +5,6 @@ import { SourceRoutingModule } from './source-routing.module';
 
 // feature modules
 import { FileHandlingModule } from '../file-handling/file-handling.module';
-import { UiModule } from '../shared/ui/ui.module';
 
 // components
 import { SourceEditComponent } from './source-edit/source-edit.component';
@@ -34,7 +33,6 @@ import { SourceService } from './source.service';
     FormsModule,
     ReactiveFormsModule,
     SourceRoutingModule,
-    UiModule,
     FileHandlingModule,
     DataTableModule,
     SharedModule,

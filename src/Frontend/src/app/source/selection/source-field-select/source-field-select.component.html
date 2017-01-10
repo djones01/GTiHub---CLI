@@ -1,12 +1,12 @@
 <div class="input-group">
     <span class="input-group-btn">
-        <button class="btn btn-default" type="button" (click)="showSelectDialog(content)"><span class="fa fa-search"></span></button>
+        <button class="btn btn-default" type="button" (click)="toggleDialog()"><span class="fa fa-search"></span></button>
     </span>
     <label *ngIf="selectedSourceField != null" class="form-control hide-overflow">{{selectedSourceField.name}}</label>
     <label *ngIf="selectedSourceField == null" class="form-control hide-overflow">Source Field</label>
 </div>
 
-<p-dialog header="Select a Source Field" [modal]="true" responsive="true" width="800" [(visible)]="showDialog">
+<p-dialog header="Select a Source Field" [modal]="true" responsive="true" width="800" [(visible)]="showDialog" [closable]="false">
     <p-dataTable [value]="sources" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" expandableRows="true" 
                  [resizableColumns]="true" [responsive]="true"
                  [stacked]="stacked"
@@ -31,14 +31,14 @@
                             </div>
                         </header>
                         <p-column [style]="{'width':'38px'}" selectionMode="single"></p-column>
-                        <p-column *ngIf="loading && expandedSource.sourceFields == null">
-                            <loading-dots></loading-dots>
-                        </p-column>
                         <p-column *ngFor="let sourceFieldCol of sourceFieldCols" [field]="sourceFieldCol.field" [header]="sourceFieldCol.header" [sortable]="true"></p-column>
                     </p-dataTable>
                 </div>
             </div>
         </template>
     </p-dataTable>
+    <hr>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="selectedSourceField == null" (click)="toggleDialog()">Select Sourcefield</button>
 </p-dialog>
 

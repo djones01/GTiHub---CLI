@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { OverviewComponent } from './overview/overview.component';
+import { AboutComponent } from '../about/about.component';
 import { HomeComponent } from './home.component';
 
 export const routes: Routes = [
@@ -13,7 +14,8 @@ export const routes: Routes = [
         { path: 'client', loadChildren: 'app/client/client.module#ClientModule' },
         { path: 'source', loadChildren: 'app/source/source.module#SourceModule' },
         { path: 'map', loadChildren: 'app/map/map.module#MapModule' },
-        { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }  
+        { path: 'project', loadChildren: 'app/project/project.module#ProjectModule' }, 
+        { path: 'about', component: AboutComponent }
     ]}   
 ];
 

@@ -1,13 +1,12 @@
-﻿namespace GTiHub.Controllers.API
+﻿namespace Backend.Controllers
 {
     #region
 
     using System.Collections.Generic;
     using System.Linq;
 
-    using GTiHub.Models.EntityModel;
-
     using Microsoft.AspNetCore.Mvc;
+    using Backend.Models.EntityModels;
 
     #endregion
 
@@ -19,19 +18,7 @@
         public SourcesController(GTiHubContext _dbContext)
         {
             this._dbContext = _dbContext;
-        }
-
-        // DELETE api/Sources/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var source = this._dbContext.Sources.FirstOrDefault(x => x.SourceId == id);
-            if (source == null) return this.NotFound();
-
-            this._dbContext.Sources.Remove(source);
-            this._dbContext.SaveChanges();
-            return new NoContentResult();
-        }
+        }       
 
         // GET: api/Sources
         [HttpGet]
@@ -90,6 +77,18 @@
 
             this._dbContext.SaveChanges();
 
+            return new NoContentResult();
+        }
+
+        // DELETE api/Sources/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var source = this._dbContext.Sources.FirstOrDefault(x => x.SourceId == id);
+            if (source == null) return this.NotFound();
+
+            this._dbContext.Sources.Remove(source);
+            this._dbContext.SaveChanges();
             return new NoContentResult();
         }
     }

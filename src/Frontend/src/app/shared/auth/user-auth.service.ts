@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../data/data.module';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { LoginModel } from '../../login/login-model';
+import { User } from '../../user/user';
+import { AuthTokenService } from './auth-token.service';
 
 @Injectable()
 export class UserAuthService {
-    constructor(private dataService: DataService) { }
+    constructor(private http: Http, private authTokens: AuthTokenService) { }
 
-    login(username: string, password: string) {
-        /*return this.dataService.Add('authenticate', { username: username, password: password })
-            .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-            });*/
+    register(user: User): Observable<User> {
+        return this.http.post('api/account/', user)
+            .catch(res => Observable.throw(res.json()));
+    }
+
+    login(user: LoginModel) {
+        return this.authTokens.getTokens(user, 'password').catch(res => Observable.throw(res.json()));
     }
 
     logout() {
         // remove user from local storage to log user out
-        //localStorage.removeItem('currentUser');
+        this.authTokens.deleteTokens();
     }
 }

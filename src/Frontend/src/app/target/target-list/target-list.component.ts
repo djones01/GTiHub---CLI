@@ -8,11 +8,14 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   selector: 'target-list',
   templateUrl: './target-list.component.html',
   styleUrls: ['./target-list.component.css'],
-  inputs: ['showFooterOptions'],
+  inputs: ['showFooterOptions', 'showHeader', 'emitSelected'],
   outputs: ['onSelectedTargetsChange']
 })
 export class TargetListComponent implements OnInit {
-    public howFooterOptions: boolean = true;
+    public emitSelected: boolean = false;
+    public showHeader: boolean = true;
+    public showFooterOptions: boolean = true;
+
     public onSelectedTargetsChange = new EventEmitter();
     private showDialog = false;
     private canDelete = false;
@@ -61,7 +64,8 @@ export class TargetListComponent implements OnInit {
             this.canEdit = true;
         }
 
-        this.onSelectedTargetsChange.emit(this.selectedTargets);
+        if(this.emitSelected)
+            this.onSelectedTargetsChange.emit(this.selectedTargets);
     }
     onRowUnselect(event) {
         if (this.selectedTargets.length == 1) {
@@ -72,7 +76,8 @@ export class TargetListComponent implements OnInit {
             this.canEdit = false;
         }
 
-        this.onSelectedTargetsChange.emit(this.selectedTargets);
+        if(this.emitSelected)
+            this.onSelectedTargetsChange.emit(this.selectedTargets);
     }
 
     constructor(private confirmationService: ConfirmationService, private router: Router, private targetService: TargetService) { }

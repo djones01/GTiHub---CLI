@@ -15,6 +15,8 @@ import { DataModule } from './shared/data/data.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
+// app settings
+import { AppSettings } from './app-settings';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { LoginComponent } from './login/login.component';
     DataModule,
     AppRoutingModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AppSettings]
 })
 export class AppModule { }

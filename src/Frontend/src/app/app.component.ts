@@ -13,7 +13,7 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
    // Sets initial value to true to show loading spinner on first load
     loading: boolean = true;
 

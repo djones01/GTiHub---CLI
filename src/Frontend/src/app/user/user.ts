@@ -1,15 +1,16 @@
 export interface IUser {
-    userId?: number;
+    id?: number;
     firstName: string;
     lastName: string;
     title?: string;
-    phone?: string;
+    phoneNumber?: string;
     email: string;
     created_By?: string;
     creation_Date?: Date;
     modified_By?: string;
     date_Modified?: Date;
     projects?: any[];
+    roles: string[];
 }
 
 export class User implements IUser {
@@ -17,9 +18,10 @@ export class User implements IUser {
         public firstName: string,
         public lastName: string,     
         public email: string,
+        public roles: string[],
         public title?: string,
-        public phone?: string,
-        public userId?: number,
+        public phoneNumber?: string,
+        public id?: number,
         public created_By?: string,
         public creation_Date?: Date,
         public modified_By?: string,

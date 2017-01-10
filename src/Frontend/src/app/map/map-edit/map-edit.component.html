@@ -2,28 +2,34 @@
     <h4>Add / Edit Maps</h4>
     <hr />
     <form [formGroup]="mapForm" novalidate (ngSubmit)="onSubmit(mapForm.value)">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" class="form-control" formControlName="description" />
-                    <small *ngIf="!mapForm.controls.description.valid" class="text-danger">
-                        Description is required
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label>Effective Date</label>
-                    <input class="form-control" type="date" formControlName="effective_Date" />
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" formControlName="active">
-                    Active
-                    </label>
-                </div>
+        <p-panel header="Map Options" [toggleable]="true">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" formControlName="description" />
+                        <small *ngIf="!mapForm.controls.description.valid" class="text-danger">
+                            Description is required
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Effective Date</label>
+                        <input class="form-control" type="date" formControlName="effective_Date" />
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" formControlName="active">
+                        Active
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" (click)="addTransform()"><span class="fa fa-plus"></span> Add Transformation</button>
+                    </div>
+                </div>  
             </div>  
-        </div>  
-        <button type="button" class="btn btn-default" (click)="addTransform()"><span class="fa fa-plus"></span> Add Transformation</button>
+        </p-panel>
+        
+        
         <hr />
         <div >    
             <p-panel formArrayName="transformations" *ngFor="let transformation of mapForm.controls.transformations?.controls; let i=index" [toggleable]="true">

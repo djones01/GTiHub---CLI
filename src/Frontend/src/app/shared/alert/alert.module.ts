@@ -14,6 +14,7 @@ export { AlertService } from './alert.service';
     GrowlModule
   ],
   declarations: [AlertComponent],
+  exports: [AlertComponent],
   providers: [AlertService]
 })
 export class AlertModule { }

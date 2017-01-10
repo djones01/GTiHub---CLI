@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { User } from "../user";
+import { RegisterUser } from "./user-register";
 import { UserService } from "../user.service";
 
 @Component({
@@ -11,10 +11,9 @@ import { UserService } from "../user.service";
 export class UserEditComponent implements OnInit {
   public userForm: FormGroup;
     public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-    user: User;
+    user: RegisterUser;
 
-    onSubmit(user: User) {
-        Object.assign(this.user, user);
+    onSubmit(user: RegisterUser) {
         this.userService.submit(user);
         this.reset();
     }
@@ -24,8 +23,9 @@ export class UserEditComponent implements OnInit {
             firstName: [this.user.firstName, Validators.required],
             lastName: [this.user.lastName, Validators.required],
             title: [this.user.title],
-            phone: [this.user.phone],
-            email: [this.user.email, Validators.required]
+            phoneNumber: [this.user.phoneNumber],
+            email: [this.user.email, Validators.required],
+            password: [this.user.password, Validators.required],
         });
     }
 
@@ -37,7 +37,7 @@ export class UserEditComponent implements OnInit {
     }
 
     ngOnInit(): void {        
-        this.userService.editUser.subscribe(user => {
+        this.userService.editUser.subscribe((user: RegisterUser) => {
             this.user = user;  
             this.initUserForm();
         });     

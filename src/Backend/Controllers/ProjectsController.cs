@@ -1,13 +1,12 @@
-﻿namespace GTiHub.Controllers.API
+﻿namespace Backend.Controllers
 {
     #region
 
     using System.Collections.Generic;
     using System.Linq;
 
-    using GTiHub.Models.EntityModel;
-
     using Microsoft.AspNetCore.Mvc;
+    using Backend.Models.EntityModels;
 
     #endregion
 

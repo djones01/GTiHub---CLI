@@ -4,12 +4,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
-using GTiHub.Models.EntityModel;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using GTiHub.API;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Backend.Helpers;
+using Backend.Models.EntityModels;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend
 {
@@ -34,7 +37,7 @@ namespace Backend
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var corsBuilder = new CorsPolicyBuilder();
@@ -49,33 +52,29 @@ namespace Backend
                 options.AddPolicy("AllowAll", corsBuilder.Build());
             });
 
-            // Add framework services.
-            services.AddMemoryCache();
-            services.AddSession();
             services.AddMvc();
+
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddEntityFrameworkSqlServer().AddDbContext<GTiHubContext>(options => {
+                options.UseSqlServer(connection);
+            });
+
+            // Register the Identity services.
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<GTiHubContext>()
+                .AddDefaultTokenProviders();
 
             // Add the TransformHelpers service
             services.TryAddTransient<ITransformHelpers, TransformHelpers>();
-
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            var connection = @"Server=DESKTOP-DJA91SQ;Database=ihubdb;Trusted_Connection=True;";
-            services.AddDbContext<GTiHubContext>(options => options.UseSqlServer(connection));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseCors("AllowAll");
+            app.UseDeveloperExceptionPage();
 
-            loggerFactory.AddConsole();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseSession();
             app.Use(async (context, next) =>
             {
                 await next();
@@ -89,13 +88,9 @@ namespace Backend
                 }
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}/{id?}");
-            });
-            app.UseStaticFiles();
+            app.UseIdentity();
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

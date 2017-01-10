@@ -7,11 +7,11 @@
         <div class="card-block">
             <h2 class="card-title">Login to GTiHub</h2>
             <form [formGroup]="loginForm" (ngSubmit)="submitForm(loginForm.value)">
-                <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
-                    <label>Email:</label>
-                    <input class="form-control" type="text" placeholder="user@example.com" [formControl]="loginForm.controls['email']">
-                    <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched" class="alert alert-danger">Enter valid email.</div>
-                    <div *ngIf="loginForm.controls['email'].hasError('email') && loginForm.controls['email'].touched" class="alert alert-danger">Email must be valid format.</div>
+                <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['username'].valid && loginForm.controls['username'].touched}">
+                    <label>Email/Username:</label>
+                    <input class="form-control" type="text" placeholder="user@example.com" [formControl]="loginForm.controls['username']">
+                    <div *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched" class="alert alert-danger">Enter valid email.</div>
+                    <div *ngIf="loginForm.controls['username'].hasError('email') && loginForm.controls['username'].touched" class="alert alert-danger">Email must be valid format.</div>
                 </div>
                 <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
                     <label>Password:</label>

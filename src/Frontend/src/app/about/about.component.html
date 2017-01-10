@@ -1,0 +1,99 @@
+<div class="jumbotron">
+    <h1>About GTiHub</h1>
+    <p>
+      The Grant Thornton Integration Hub (GTiHub) was developed in order to assist with integrating file resources into Oracle systems, however
+      the conversion features can be used with any target system in which custom data formats are required.
+    </p>
+    <p>
+      The instructions below should answer any questions you may have about the terminology and usage procedures within iHub. 
+    </p>
+</div>
+<div class="container" style="padding-bottom: 50px">
+    <section>
+        <h2>Terminology</h2>
+        <p>Terms and Definitions are roughly ordered in terms of granularity (i.e. a field is a part of a source, which is part of a transformation, etc.) </p>
+        <table class="table table-responsive">
+          <tr>
+            <td>Field</td>
+            <td>Fields can be thought of as single column headers in a data table, or as one value in a delimited list of values. Fields exist in both Sources 
+              and Targets, and the fields can have a number of different user-defined data types. 
+            </td>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td>A flat file with a file type of <b>.txt, .dat, or .csv</b> from which some or all fields are taken and converted or formatted to a Target.</td>
+          </tr>
+          <tr>
+            <td>Target</td>
+            <td>Represents a pre-defined output format as chosen by the user and which is the result of performing a Mapping one or more sources. 
+              Can be a flat file with type <b>.txt, .dat, or .csv</b>, as chosen by the user at the time of running the Map.</td>
+          </tr>
+           <tr>
+            <td>Transformation</td>
+            <td>A single action of converting one or more Source Fields to a single Target Field. For example, the operation 
+              "Convert Source Field X to Target Field Y if Source Field X equals '2016'"" would be a single Transformation. A single Transformation may contain at 
+              most one Rule, but may contain zero or more Conditions.
+            </td>
+          </tr>
+          <tr>
+            <td>Rule</td>
+            <td>
+              The operation to be performed for a given transformation, for the example in the definition of Transformation the Rule would be "Convert Source Field X to Target Field Y".
+            </td>
+          </tr>
+          <tr>
+            <td>Condition</td>
+            <td>
+              A condition is what determines if the Transformation takes place or not for a given field in a given row of data. In the example for Transformation,
+              the Condition is the "if Source Field X equals '2016'" part.
+            </td>
+          </tr>
+          <tr>
+            <td>Map</td>
+            <td>
+              A collection of Transformations which defines the overall pattern for transforming one or more Sources to one or more Targets.
+            </td>
+          </tr>
+        </table>
+    </section>
+    <section>
+        <h2>Integrating Sources and Outputting to Targets</h2>
+        <p>
+          The general flow for using iHub is as follows:
+        </p>
+        <ol>
+            <li>
+              Gather the files you need to perform a complete mapping
+            </li>
+            <li>
+              Define Sources and Targets using those files
+            </li>
+            <li>
+              Create a new Map for containing the Transformations
+            </li>
+            <li>
+              Create Transformations within the Map you created
+            </li>
+            <li>
+              Run the Map you created
+            </li>
+        </ol>
+        <h3>File Formats</h3>
+        <p>As stated before, the file formats currently accepted for use within GTiHub are <b>.txt, .dat, and .csv</b> files. The files must be in a delimited format,
+          and any delimiter may be used, so long as it cannot be found within the contents of the field itself or otherwise misinterpreted. For example, if a comma delimited file is provided and 
+          commas exist within fields in the row of data specified as the header row, or within some row of data below the header, then the result can be either too many header
+          fields read in or errors on attempting to transform the data.
+        </p>
+        <h3>Defining Sources and Targets</h3>
+        <p>
+          Defining Sources and Targets follows similar procedures. Provide a name and description for the Source and Target, where the name is typically the name of the 
+          file being used as a template / input for Sources, or the name of the expected output file for a Target. Specify the effective date and whether or not the Source/Target is active.
+          After this, provide a template file with data in the first row, or manually specify the fields for the Source or Target.
+        </p>
+        <h3>Creating Transformations</h3>
+        <p>
+          Upon creating a new Map, one can define the Transformations within it which will specify how and when to transform data from Source to Target, and in what format.
+          
+        </p>
+    </section>
+</div>

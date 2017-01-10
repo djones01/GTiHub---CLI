@@ -17,7 +17,7 @@ export class SourceFieldSelectComponent implements OnInit, ControlValueAccessor 
   private sources: Source[];
   private showDialog = false;
   private expandedSource: Source;
-  private loading = false;
+  private loading = true;
 
   //
   private sourceColumnOptions: SelectItem[];
@@ -50,16 +50,23 @@ export class SourceFieldSelectComponent implements OnInit, ControlValueAccessor 
       let timeout = setTimeout(function(){ this.loading = true }, 1000);
       this.expandedSource = event.data;
       // get source fields for the selected source
-      this.sourceService.getSourceFields(this.expandedSource.sourceId)
+      if(this.expandedSource.sourceFields == null || this.expandedSource.sourceFields == []){
+          this.sourceService.getSourceFields(this.expandedSource.sourceId)
         .subscribe(sourcefields => 
             this.expandedSource.sourceFields = sourcefields, 
             () => {
                 clearTimeout(timeout);
                 this.loading = false;
             });
+      }
   }
 
-  showSelectDialog(){
+  cancel(){
+      this.selectedSourceField = null;
+      this.toggleDialog();
+  }
+
+  toggleDialog(){
     this.showDialog = !this.showDialog;
   }
   

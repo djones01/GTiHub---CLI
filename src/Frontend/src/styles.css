@@ -18,11 +18,16 @@
     margin-bottom: 1rem;
 }
 
+.add-margin-main-body {
+    margin-top: 70px;
+    margin-bottom: 75px;
+}
+
 .full-height {
     height: 100vh;
 }
 
 .delimiter-field {
-    min-width: 2em;
+    max-width: 3em;
 }
 

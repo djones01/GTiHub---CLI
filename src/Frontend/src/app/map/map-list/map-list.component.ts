@@ -8,12 +8,18 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   selector: 'map-list',
   templateUrl: './map-list.component.html',
   styleUrls: ['./map-list.component.css'],
-  inputs: ['showFooterOptions'],
+  inputs: ['showFooterOptions', 'showHeader', 'emitSelected'],
   outputs: ['onSelectedMapsChange']
 })
 export class MapListComponent implements OnInit {
+    // Control behavior of the list
+    public showHeader: boolean = true;
     public showFooterOptions: boolean = true;
+    public emitSelected: boolean = false;
+
+    // Emit selected maps
     public onSelectedMapsChange = new EventEmitter();
+    
     private showDialog = false;
     private canDelete = false;
     private canEdit = false;
@@ -60,7 +66,8 @@ export class MapListComponent implements OnInit {
             this.canEdit = true;
         }
 
-        this.onSelectedMapsChange.emit(this.selectedMaps);
+        if(this.emitSelected)
+            this.onSelectedMapsChange.emit(this.selectedMaps);
     }
     onRowUnselect(event) {
         if (this.selectedMaps.length == 1) {
@@ -71,7 +78,8 @@ export class MapListComponent implements OnInit {
             this.canEdit = false;
         }
 
-        this.onSelectedMapsChange.emit(this.selectedMaps);
+        if(this.emitSelected)
+            this.onSelectedMapsChange.emit(this.selectedMaps);
     }
 
     constructor(private confirmationService: ConfirmationService, private router: Router, private mapService: MapService) { }
