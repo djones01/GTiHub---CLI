@@ -17,7 +17,7 @@ export class MapRunService {
     // On changing selected mapping
     initFilePackages(mapId: number) {
         var filepackages = new Array<FilePackage>();
-        this._dataService.Get("Maps/MapSources", mapId)
+        this.dataService.Get("Maps/MapSources", mapId)
             .subscribe(sources => {
                 sources.forEach(function(source) {
                     filepackages.push({
@@ -71,5 +71,5 @@ export class MapRunService {
         }
     }
 
-    constructor(private _dataService: DataService, private fileUploadService: FileUploadService) {}
+    constructor(private dataService: DataService, private fileUploadService: FileUploadService) {}
 }

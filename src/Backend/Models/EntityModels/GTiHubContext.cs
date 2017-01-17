@@ -11,6 +11,8 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using System.Reflection;
+    using System.Collections.Generic;
 
     #endregion
 

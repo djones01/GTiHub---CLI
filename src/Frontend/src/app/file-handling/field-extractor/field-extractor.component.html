@@ -1,5 +1,6 @@
 <p-panel header="Extract Fields" [toggleable]="true">
     <h5>1 - Set Input File Delimiter</h5>
+    <p>Any character may be used as a delimiter, but make sure that the chosen character is in fact the one used to delimit the fields in the input file</p>
     <hr>
     <div class="form-group">
       <div class="col-xs-1">
@@ -7,12 +8,21 @@
         <input type="text" name="delimiter" [(ngModel)]="delimiter" maxlength="1" size="1" width="1" class="form-control delimiter-field" /> 
       </div>
     </div>
-    <h5>2 - Provide Input File and Upload</h5>
-    <h6>Input file must be in a delimited flat file format (.txt, .dat, .csv) with the field names in the first row</h6>
+    <h5>2 - Set Number of Row to Extract Fields from</h5>
+    <p>Any number greater than 0 with 1 being the first row of data in the input file</p>
+    <hr>
+    <div class="form-group">
+      <div class="col-xs-1">
+         <label for="fieldRow">Field Row</label>
+        <input type="number" name="fieldRow" [(ngModel)]="fieldRow" min="1" class="form-control field-row-input" /> 
+      </div>
+    </div>
+    <h5>3 - Provide Input File and Upload</h5>
+    <p>Input file must be in a delimited flat file format (.txt, .dat, .csv) with the field names in the first row<p>
     <hr>
     <div class="form-group">
         <label for="templateFile">Select Template File</label>
-        <p-fileUpload name="file[]" url="/api/File/ExtractFields" [disabled]="delimiter == ''" 
+        <p-fileUpload name="file[]" url="http://localhost:5000/api/File/ExtractFields" [disabled]="delimiter == ''" 
         (onUpload)="onFileUpload($event)" (onBeforeUpload)="onBeforeFileUpload($event)"></p-fileUpload>
     </div>
 </p-panel>

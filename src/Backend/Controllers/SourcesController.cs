@@ -31,7 +31,7 @@
         [HttpGet("{id}", Name = "GetSource")]
         public IActionResult Get(int id)
         {
-            var source = this._dbContext.Sources.FirstOrDefault(x => x.SourceId == id);
+            var source = this._dbContext.Sources.Find(id);
             if (source == null) return this.NotFound();
 
             return new ObjectResult(source);
@@ -64,7 +64,7 @@
         {
             if ((source == null) || (source.SourceId != id)) return this.BadRequest();
 
-            var updatedSource = this._dbContext.Sources.FirstOrDefault(x => x.SourceId == id);
+            var updatedSource = this._dbContext.Sources.Find(id);
 
             if (updatedSource == null) return this.NotFound();
 
@@ -84,7 +84,7 @@
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var source = this._dbContext.Sources.FirstOrDefault(x => x.SourceId == id);
+            var source = this._dbContext.Sources.Find(id);
             if (source == null) return this.NotFound();
 
             this._dbContext.Sources.Remove(source);

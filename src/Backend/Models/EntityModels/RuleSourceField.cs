@@ -17,6 +17,7 @@
         public string Prepend { get; set; }
         public string Append { get; set; }
         public string Custom_Format { get; set; }
+        public bool Trim { get; set; }
         public int SeqNum { get; set; }
 
         public  Rule Rule { get; set; }

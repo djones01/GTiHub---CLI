@@ -12,6 +12,14 @@
     {
         public Project() { }
 
+        public Project(string name, string description, string project_type, Client client)
+        {
+            Name = name;
+            Description = description;
+            Project_Type = project_type;
+            Client = client;
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjectId { get; set; }

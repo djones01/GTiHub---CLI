@@ -16,7 +16,7 @@ namespace Backend.Migrations
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ApplicationUser", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -88,7 +88,7 @@ namespace Backend.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Client", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Client", b =>
                 {
                     b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
@@ -115,7 +115,7 @@ namespace Backend.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Condition", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Condition", b =>
                 {
                     b.Property<int>("ConditionId")
                         .ValueGeneratedOnAdd()
@@ -158,7 +158,7 @@ namespace Backend.Migrations
                     b.ToTable("Conditions");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Map", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Map", b =>
                 {
                     b.Property<int>("MapId")
                         .ValueGeneratedOnAdd()
@@ -187,7 +187,7 @@ namespace Backend.Migrations
                     b.ToTable("Maps");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Project", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Project", b =>
                 {
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd()
@@ -220,7 +220,7 @@ namespace Backend.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectMap", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectMap", b =>
                 {
                     b.Property<int>("ProjectId");
 
@@ -245,7 +245,7 @@ namespace Backend.Migrations
                     b.ToTable("ProjectMaps");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectSource", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectSource", b =>
                 {
                     b.Property<int>("ProjectId");
 
@@ -270,7 +270,7 @@ namespace Backend.Migrations
                     b.ToTable("ProjectSources");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectTarget", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectTarget", b =>
                 {
                     b.Property<int>("ProjectId");
 
@@ -295,7 +295,7 @@ namespace Backend.Migrations
                     b.ToTable("ProjectTargets");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Rule", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Rule", b =>
                 {
                     b.Property<int>("RuleId")
                         .ValueGeneratedOnAdd()
@@ -333,7 +333,7 @@ namespace Backend.Migrations
                     b.ToTable("Rules");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.RuleSourceField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.RuleSourceField", b =>
                 {
                     b.Property<int>("RuleSourceFieldId")
                         .ValueGeneratedOnAdd()
@@ -359,6 +359,8 @@ namespace Backend.Migrations
 
                     b.Property<int>("SourceFieldId");
 
+                    b.Property<bool>("Trim");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
@@ -372,7 +374,7 @@ namespace Backend.Migrations
                     b.ToTable("RuleSourceFields");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Source", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Source", b =>
                 {
                     b.Property<int>("SourceId")
                         .ValueGeneratedOnAdd()
@@ -403,7 +405,7 @@ namespace Backend.Migrations
                     b.ToTable("Sources");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.SourceField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.SourceField", b =>
                 {
                     b.Property<int>("SourceFieldId")
                         .ValueGeneratedOnAdd()
@@ -438,7 +440,7 @@ namespace Backend.Migrations
                     b.ToTable("SourceFields");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Target", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Target", b =>
                 {
                     b.Property<int>("TargetId")
                         .ValueGeneratedOnAdd()
@@ -469,7 +471,7 @@ namespace Backend.Migrations
                     b.ToTable("Targets");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.TargetField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.TargetField", b =>
                 {
                     b.Property<int>("TargetFieldId")
                         .ValueGeneratedOnAdd()
@@ -504,7 +506,7 @@ namespace Backend.Migrations
                     b.ToTable("TargetFields");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Transformation", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Transformation", b =>
                 {
                     b.Property<int>("TransformationId")
                         .ValueGeneratedOnAdd()
@@ -533,7 +535,7 @@ namespace Backend.Migrations
                     b.ToTable("Transformations");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.UserProjectSec", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.UserProjectSec", b =>
                 {
                     b.Property<int>("UserProjSecId")
                         .ValueGeneratedOnAdd()
@@ -679,131 +681,131 @@ namespace Backend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ApplicationUser", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ApplicationUser", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Client")
+                    b.HasOne("Backend.Models.EntityModels.Client")
                         .WithMany("Users")
                         .HasForeignKey("ClientId");
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Condition", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Condition", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.SourceField", "SourceField")
+                    b.HasOne("Backend.Models.EntityModels.SourceField", "SourceField")
                         .WithMany("Conditions")
                         .HasForeignKey("SourceFieldId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.Transformation", "Transformation")
+                    b.HasOne("Backend.Models.EntityModels.Transformation", "Transformation")
                         .WithMany("Conditions")
                         .HasForeignKey("TransformationId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Project", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Project", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Client", "Client")
+                    b.HasOne("Backend.Models.EntityModels.Client", "Client")
                         .WithMany("Projects")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectMap", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectMap", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Map", "Map")
+                    b.HasOne("Backend.Models.EntityModels.Map", "Map")
                         .WithMany("ProjectMaps")
                         .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.Project", "Project")
+                    b.HasOne("Backend.Models.EntityModels.Project", "Project")
                         .WithMany("ProjectMaps")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectSource", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectSource", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Project", "Project")
+                    b.HasOne("Backend.Models.EntityModels.Project", "Project")
                         .WithMany("ProjectSources")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.Source", "Source")
+                    b.HasOne("Backend.Models.EntityModels.Source", "Source")
                         .WithMany("ProjectSources")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.ProjectTarget", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.ProjectTarget", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Project", "Project")
+                    b.HasOne("Backend.Models.EntityModels.Project", "Project")
                         .WithMany("ProjectTargets")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.Target", "Target")
+                    b.HasOne("Backend.Models.EntityModels.Target", "Target")
                         .WithMany("ProjectTargets")
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Rule", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Rule", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.TargetField", "TargetField")
+                    b.HasOne("Backend.Models.EntityModels.TargetField", "TargetField")
                         .WithMany("Rules")
                         .HasForeignKey("TargetFieldId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.Transformation", "Transformation")
+                    b.HasOne("Backend.Models.EntityModels.Transformation", "Transformation")
                         .WithOne("Rule")
-                        .HasForeignKey("GTiHub.Models.EntityModel.Rule", "TransformationId")
+                        .HasForeignKey("Backend.Models.EntityModels.Rule", "TransformationId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.RuleSourceField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.RuleSourceField", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Rule", "Rule")
+                    b.HasOne("Backend.Models.EntityModels.Rule", "Rule")
                         .WithMany("RuleSourceFields")
                         .HasForeignKey("RuleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.SourceField", "SourceField")
+                    b.HasOne("Backend.Models.EntityModels.SourceField", "SourceField")
                         .WithMany("RuleSourceFields")
                         .HasForeignKey("SourceFieldId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.SourceField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.SourceField", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Source", "Source")
+                    b.HasOne("Backend.Models.EntityModels.Source", "Source")
                         .WithMany("SourceFields")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.TargetField", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.TargetField", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Target", "Target")
+                    b.HasOne("Backend.Models.EntityModels.Target", "Target")
                         .WithMany("TargetFields")
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.Transformation", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.Transformation", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Map", "Map")
+                    b.HasOne("Backend.Models.EntityModels.Map", "Map")
                         .WithMany("Transformations")
                         .HasForeignKey("MapId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("GTiHub.Models.EntityModel.UserProjectSec", b =>
+            modelBuilder.Entity("Backend.Models.EntityModels.UserProjectSec", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.Project", "Project")
+                    b.HasOne("Backend.Models.EntityModels.Project", "Project")
                         .WithMany("UserProjectSecs")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser", "User")
+                    b.HasOne("Backend.Models.EntityModels.ApplicationUser", "User")
                         .WithMany("UserProjectSecs")
                         .HasForeignKey("UserId1");
                 });
@@ -818,7 +820,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                    b.HasOne("Backend.Models.EntityModels.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -826,7 +828,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                    b.HasOne("Backend.Models.EntityModels.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -839,7 +841,7 @@ namespace Backend.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GTiHub.Models.EntityModel.ApplicationUser")
+                    b.HasOne("Backend.Models.EntityModels.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

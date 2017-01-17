@@ -24,7 +24,7 @@
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var target = this._dbContext.Targets.FirstOrDefault(x => x.TargetId == id);
+            var target = this._dbContext.Targets.Find(id);
             if (target == null) return this.NotFound();
 
             this._dbContext.Targets.Remove(target);
@@ -43,7 +43,7 @@
         [HttpGet("{id}", Name = "GetTarget")]
         public IActionResult Get(int id)
         {
-            var target = this._dbContext.Targets.FirstOrDefault(x => x.TargetId == id);
+            var target = this._dbContext.Targets.Find(id);
             if (target == null) return this.NotFound();
 
             return new ObjectResult(target);
@@ -73,7 +73,7 @@
         {
             if ((target == null) || (target.TargetId != id)) return this.BadRequest();
 
-            var updatedTarget = this._dbContext.Targets.FirstOrDefault(x => x.TargetId == id);
+            var updatedTarget = this._dbContext.Targets.Find(id);
 
             if (updatedTarget == null) return this.NotFound();
 

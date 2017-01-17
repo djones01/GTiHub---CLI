@@ -13,6 +13,8 @@ import { DataTableModule, SharedModule, ButtonModule, DialogModule, ConfirmDialo
 // services
 import { ClientService } from "./client.service";
 
+export { ClientService } from "./client.service";
+
 @NgModule({
   imports: [
     CommonModule,

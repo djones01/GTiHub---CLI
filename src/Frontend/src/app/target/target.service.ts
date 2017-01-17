@@ -16,7 +16,7 @@ private _targets: BehaviorSubject<Target[]> = new BehaviorSubject([]);
     };
 
     loadall() {
-        this._dataService.GetAll("Targets")
+        this.dataService.GetAll("Targets")
             .subscribe(targets => {
                 this.dataStore.targets = targets;
                 this._targets.next(this.dataStore.targets);
@@ -24,7 +24,7 @@ private _targets: BehaviorSubject<Target[]> = new BehaviorSubject([]);
     }
 
     getTargetFields(targetId: number): Observable<TargetField[]> {
-        return this._dataService.Get("Targets/GetTargetFieldsbyTarget", targetId);
+        return this.dataService.Get("Targets/GetTargetFieldsbyTarget", targetId);
     }
 
     setEditTarget(edit: Target) {
@@ -42,14 +42,14 @@ private _targets: BehaviorSubject<Target[]> = new BehaviorSubject([]);
     }
 
     add(target: Target) {
-        this._dataService.Add('Targets', target).subscribe(target => {
+        this.dataService.Add('Targets', target).subscribe(target => {
             this.dataStore.targets.push(target);
             this._targets.next(this.dataStore.targets);
         }, error => console.log(error));
     }
 
     update(target: Target) {
-        this._dataService.Update('Targets', target.targetId, target).subscribe((target: Target) => {
+        this.dataService.Update('Targets', target.targetId, target).subscribe((target: Target) => {
             this.dataStore.targets.forEach((m, i) => {
                 if (m.targetId === target.targetId) { this.dataStore.targets[i] = target; }
             });
@@ -58,7 +58,7 @@ private _targets: BehaviorSubject<Target[]> = new BehaviorSubject([]);
     }
 
     delete(targetId: number) {
-        this._dataService.Delete('Targets', targetId).subscribe(response => {
+        this.dataService.Delete('Targets', targetId).subscribe(response => {
             this.dataStore.targets.forEach((m, i) => {
                 if (m.targetId === targetId) { this.dataStore.targets.splice(i, 1); }
             });
@@ -66,7 +66,7 @@ private _targets: BehaviorSubject<Target[]> = new BehaviorSubject([]);
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService) {
+    constructor(private dataService: DataService) {
         this.dataStore = { targets: [] };
         // Get the list of targets
         this.loadall();

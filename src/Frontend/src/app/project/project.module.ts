@@ -7,6 +7,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { SourceModule } from '../source/source.module';
 import { TargetModule } from '../target/target.module';
 import { MapModule } from '../map/map.module';
+import { ClientModule } from '../client/client.module';
 
 // components
 import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
@@ -39,6 +40,7 @@ import { ProjectService } from './project.service';
     SourceModule,
     TargetModule,
     MapModule,
+    ClientModule,
     DataTableModule, 
     SharedModule, 
     ButtonModule, 

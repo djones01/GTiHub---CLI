@@ -1,23 +1,44 @@
 <div class="input-group">
     <span class="input-group-btn">
-        <button class="btn btn-default" type="button" (click)="showSelectDialog(content)"><span class="fa fa-search"></span></button>
+        <button class="btn btn-default" type="button" (click)="toggleDialog()"><span class="fa fa-search"></span></button>
     </span>
     <label *ngIf="selectedTargetField != null" class="form-control hide-overflow">{{selectedTargetField.name}}</label>
     <label *ngIf="selectedTargetField == null" class="form-control hide-overflow">Target Field</label>
 </div>
 
-<p-dialog header="Select a Target Field" [modal]="true" [responsive]="true" [(visible)]="showDialog">
-    <p-dataTable [value]="targets" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [resizableColumns]="true" [responsive]="true"
-                 [stacked]="stacked" [(selection)]="selectedTarget"
-                 (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+<p-dialog header="Select a Target Field" [modal]="true" responsive="true" width="800" [(visible)]="showDialog" [closable]="false">
+    <p-dataTable [value]="targets" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" expandableRows="true" 
+                 [resizableColumns]="true" [responsive]="true"
+                 [stacked]="stacked"
+                 (onRowExpand)="rowExpanded($event)">
         <header>
             <div style="text-align:left">
-                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                <p-multiSelect [options]="targetColumnOptions" [(ngModel)]="targetCols"></p-multiSelect>
             </div>
         </header>
-        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-        <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [sortable]="true"></p-column>
+        <p-column expander="true" styleClass="col-icon"></p-column>
+        <p-column *ngFor="let targetCol of targetCols" [field]="targetCol.field" [header]="targetCol.header" [sortable]="true"></p-column>
+        <template let-expandedTarget pTemplate="rowexpansion">
+            <div class="ui-grid ui-grid-responsive ui-fluid" style="padding:20px">
+                <div class="ui-grid-row">            
+                    <p-dataTable [value]="expandedTarget.targetFields" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" 
+                                [resizableColumns]="true" [responsive]="true"
+                                [stacked]="stacked" [(selection)]="selectedTargetField"
+                                (onRowExpand)="rowExpanded($event)">
+                        <header>
+                            <div style="text-align:left">
+                                <p-multiSelect [options]="targetFieldColumnOptions" [(ngModel)]="targetFieldCols"></p-multiSelect>
+                            </div>
+                        </header>
+                        <p-column [style]="{'width':'38px'}" selectionMode="single"></p-column>
+                        <p-column *ngFor="let targetFieldCol of targetFieldCols" [field]="targetFieldCol.field" [header]="targetFieldCol.header" [sortable]="true"></p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+        </template>
     </p-dataTable>
+    <hr>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="selectedTargetField == null" (click)="toggleDialog()">Select Targetfield</button>
 </p-dialog>
-
 

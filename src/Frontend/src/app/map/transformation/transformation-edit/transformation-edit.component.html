@@ -10,10 +10,8 @@
             </div>
         </div>     
     </div>
-    <hr />
-    <rule-edit [group]="transForm.controls.rule" [i]="i"></rule-edit>
-    <hr />
-    <div formArrayName="conditions">
+    <rule-edit [group]="transForm.controls.rule" [i]="i" class="add-margin-bottom"></rule-edit>
+    <div formArrayName="conditions" class="add-margin-bottom">
         <p-panel *ngIf="transForm.controls.conditions.length > 0" header="Conditions" [toggleable]="true">
             <div *ngFor="let condition of transForm.controls.conditions.controls; let i=index">
                 <div class="row">
@@ -27,6 +25,5 @@
             </div>  
         </p-panel>
     </div>
-    <hr *ngIf="transForm.controls.conditions.length > 0" />
     <button type="button" class="btn btn-default" (click)="addCondition()"><span class="fa fa-plus"></span> Add Condition</button>
 </div>

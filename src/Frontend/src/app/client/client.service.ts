@@ -17,7 +17,7 @@ private _clients: BehaviorSubject<Client[]> = new BehaviorSubject([]);
     };
 
     loadall() {
-        this._dataService.GetAll("Clients")
+        this.dataService.GetAll("Clients")
             .subscribe(clients => {
                 this.dataStore.clients = clients;
                 this._clients.next(this.dataStore.clients);
@@ -48,14 +48,14 @@ private _clients: BehaviorSubject<Client[]> = new BehaviorSubject([]);
     }
 
     add(client: Client) {
-        this._dataService.Add('Clients', client).subscribe(client => {
+        this.dataService.Add('Clients', client).subscribe(client => {
             this.dataStore.clients.push(client);
             this._clients.next(this.dataStore.clients);
         }, error => console.log(error));
     }
 
     update(client: Client) {
-        this._dataService.Update('Clients', client.clientId, client).subscribe(response => {
+        this.dataService.Update('Clients', client.clientId, client).subscribe(response => {
             this.dataStore.clients.forEach((m, i) => {
                 if (m.clientId === client.clientId) { this.dataStore.clients[i] = client; }
             });
@@ -64,7 +64,7 @@ private _clients: BehaviorSubject<Client[]> = new BehaviorSubject([]);
     }
 
     delete(clientId: number) {
-        this._dataService.Delete('Clients', clientId).subscribe(response => {
+        this.dataService.Delete('Clients', clientId).subscribe(response => {
             this.dataStore.clients.forEach((m, i) => {
                 if (m.clientId === clientId) { this.dataStore.clients.splice(i, 1); }
             });
@@ -72,7 +72,7 @@ private _clients: BehaviorSubject<Client[]> = new BehaviorSubject([]);
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService) {
+    constructor(private dataService: DataService) {
         this.initEditClient();
         this.dataStore = { clients: [] };
         // Get the list of clients

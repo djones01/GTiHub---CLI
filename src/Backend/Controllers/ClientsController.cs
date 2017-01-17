@@ -24,7 +24,7 @@
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var client = this._dbContext.Clients.FirstOrDefault(x => x.ClientId == id);
+            var client = this._dbContext.Clients.Find(id);
             if (client == null) return this.NotFound();
 
             this._dbContext.Clients.Remove(client);
@@ -43,7 +43,7 @@
         [HttpGet("{id}", Name = "GetClient")]
         public IActionResult Get(int id)
         {
-            var client = this._dbContext.Clients.FirstOrDefault(x => x.ClientId == id);
+            var client = this._dbContext.Clients.Find(id);
             if (client == null) return this.NotFound();
 
             return new ObjectResult(client);
@@ -66,7 +66,7 @@
         {
             if ((client == null) || (client.ClientId != id)) return this.BadRequest();
 
-            var updatedClient = this._dbContext.Clients.FirstOrDefault(x => x.ClientId == id);
+            var updatedClient = this._dbContext.Clients.Find(id);
 
             if (updatedClient == null) return this.NotFound();
 

@@ -18,7 +18,7 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     };
 
     loadall() {
-        this._dataService.GetAll("Users")
+        this.dataService.GetAll("Users")
             .subscribe(users => {
                 this.dataStore.users = users;
                 this._users.next(this.dataStore.users);
@@ -56,7 +56,7 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     }
 
     update(user: User) {
-        this._dataService.Update('Users', user.id, user).subscribe((user: User) => {
+        this.dataService.Update('Users', user.id, user).subscribe((user: User) => {
             this.dataStore.users.forEach((m, i) => {
                 if (m.id === user.id) { this.dataStore.users[i] = user; }
             });
@@ -65,7 +65,7 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
     }
 
     delete(userId: number) {
-        this._dataService.Delete('Users', userId).subscribe(response => {
+        this.dataService.Delete('Users', userId).subscribe(response => {
             this.dataStore.users.forEach((m, i) => {
                 if (m.id === userId) { this.dataStore.users.splice(i, 1); }
             });
@@ -73,7 +73,7 @@ private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService, private userAuthService: UserAuthService) {
+    constructor(private dataService: DataService, private userAuthService: UserAuthService) {
         this.initEditUser();
         this.dataStore = { users: [] };
         // Get the list of users

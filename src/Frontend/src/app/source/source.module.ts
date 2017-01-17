@@ -27,6 +27,8 @@ import {
 // services
 import { SourceService } from './source.service';
 
+export { SourceService } from './source.service';
+
 @NgModule({
   imports: [
     CommonModule,

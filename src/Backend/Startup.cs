@@ -66,6 +66,7 @@ namespace Backend
                 .AddDefaultTokenProviders();
 
             // Add the TransformHelpers service
+            services.TryAddTransient<IProjectHelpers, ProjectHelpers>();
             services.TryAddTransient<ITransformHelpers, TransformHelpers>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }

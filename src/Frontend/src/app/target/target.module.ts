@@ -28,6 +28,8 @@ import {
 // services
 import { TargetService } from './target.service';
 
+export { TargetService } from './target.service';
+
 @NgModule({
   imports: [
     CommonModule,

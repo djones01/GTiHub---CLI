@@ -2,7 +2,7 @@
     <h4>Add / Edit Maps</h4>
     <hr />
     <form [formGroup]="mapForm" novalidate (ngSubmit)="onSubmit(mapForm.value)">
-        <p-panel header="Map Options" [toggleable]="true">
+        <p-panel header="Map Options" [toggleable]="true" styleClass="add-margin-bottom">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -27,19 +27,14 @@
                     </div>
                 </div>  
             </div>  
-        </p-panel>
-        
-        
-        <hr />
-        <div >    
-            <p-panel formArrayName="transformations" *ngFor="let transformation of mapForm.controls.transformations?.controls; let i=index" [toggleable]="true">
-                <header style="display: inline-block;">           
-                    <span class="fa fa-close ui-panel-titlebar-toggler" (click)="removeTransform(i)"></span>  
-                    <span class="ui-panel-title">Transformation {{i+1}}</span>                                
-                </header>
-                <transformation-edit [group]="mapForm.controls.transformations.controls[i]" [i]="i"></transformation-edit>
-            </p-panel>           
-        </div>
+        </p-panel>          
+        <p-panel formArrayName="transformations" *ngFor="let transformation of mapForm.controls.transformations?.controls; let i=index" [toggleable]="true">
+            <header style="display: inline-block;">           
+                <span class="fa fa-close ui-panel-titlebar-toggler" (click)="removeTransform(i)"></span>  
+                <span class="ui-panel-title">Transformation {{i+1}}</span>                                
+            </header>
+            <transformation-edit [group]="mapForm.controls.transformations.controls[i]" [i]="i"></transformation-edit>
+        </p-panel>           
         <hr *ngIf="mapForm.controls.transformations.length > 0"/>
         <button type="button" class="btn btn-default" (click)="initMapForm()"><span class="fa fa-eraser"></span> Reset Map</button>      
         <button type="submit" class="btn btn-primary" [disabled]="!mapForm.valid">Submit</button>     

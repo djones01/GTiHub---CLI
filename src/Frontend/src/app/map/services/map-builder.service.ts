@@ -32,12 +32,13 @@ export class MapBuilderService {
     }
 
     buildRuleSrcFld() {
-        return this._fb.group({
+        return this._fb.group({        
             seqNum: [this.ruleSrcFldSeqNum++],
             append: [''],
             prepend: [''],
             custom_Format: [''],
-            sourceField: [null, Validators.required]
+            sourceField: [null, Validators.required],
+            trim: [false]
         });
     }
 

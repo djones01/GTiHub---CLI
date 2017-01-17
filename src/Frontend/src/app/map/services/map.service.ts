@@ -19,7 +19,7 @@ export class MapService {
     };
 
     loadall() {
-        this._dataService.GetAll("Maps")
+        this.dataService.GetAll("Maps")
             .subscribe(maps => {
                 this.dataStore.maps = maps;
                 this._maps.next(this.dataStore.maps);
@@ -28,7 +28,7 @@ export class MapService {
 
     setEditMap(editMap: Map){ 
         // Load Transforms for the map being edited
-        this._dataService.Get('Maps/GetMapTransforms', editMap.mapId)
+        this.dataService.Get('Maps/GetMapTransforms', editMap.mapId)
             .subscribe(transformations => {
                 editMap.transformations = transformations;
                 this.router.navigate(['/map-edit']);
@@ -47,7 +47,7 @@ export class MapService {
     }
 
     add(map: Map) {
-        this._dataService.Add('Maps', map).subscribe(map => {
+        this.dataService.Add('Maps', map).subscribe(map => {
             this.dataStore.maps.push(map);
             this._maps.next(this.dataStore.maps);
         }, error => console.log(error));
@@ -56,7 +56,7 @@ export class MapService {
     update(map: Map) {
         let editId = this._editMap.getValue().mapId;
         map.mapId = editId;
-        this._dataService.Update('Maps', editId, map).subscribe(() => {
+        this.dataService.Update('Maps', editId, map).subscribe(() => {
             this.dataStore.maps.forEach((m, i) => {
                 if (m.mapId === map.mapId) { this.dataStore.maps[i] = map; }
             });
@@ -67,7 +67,7 @@ export class MapService {
     }
 
     delete(mapId: number) {
-        this._dataService.Delete('Maps', mapId).subscribe(response => {
+        this.dataService.Delete('Maps', mapId).subscribe(response => {
             this.dataStore.maps.forEach((m, i) => {
                 if (m.mapId === mapId) { this.dataStore.maps.splice(i, 1); }
             });
@@ -77,7 +77,7 @@ export class MapService {
 
 
 
-    constructor(private _dataService: DataService, private router: Router) {
+    constructor(private dataService: DataService, private router: Router) {
         this.dataStore = { maps: [] };
         this.initEditMap();
         this.loadall();

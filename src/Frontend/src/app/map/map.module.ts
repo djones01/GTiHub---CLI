@@ -14,6 +14,7 @@ import {
   MultiSelectModule, 
   PanelModule, 
   CalendarModule,
+  InputSwitchModule
 } from 'primeng/primeng';
 
 // feature modules
@@ -33,9 +34,11 @@ import { FieldFormatComponent } from './transformation/rule/field-format/field-f
 import { MapEditComponent } from './map-edit/map-edit.component';
 import { MapListComponent } from './map-list/map-list.component';
 
+// Services
 import { MapService } from './services/map.service';
 import { MapBuilderService } from './services/map-builder.service';
 import { MapRunService } from './services/map-run.service';
+export { MapService } from './services/map.service';
 
 @NgModule({
   imports: [
@@ -52,7 +55,8 @@ import { MapRunService } from './services/map-run.service';
     ConfirmDialogModule, 
     MultiSelectModule, 
     PanelModule, 
-    CalendarModule
+    CalendarModule,
+    InputSwitchModule
   ],
   declarations: [
     MapFileSelectComponent, 

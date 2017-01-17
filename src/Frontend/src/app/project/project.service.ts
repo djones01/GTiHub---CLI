@@ -18,7 +18,7 @@ export class ProjectService {
     };
 
     loadall() {
-        this._dataService.GetAll("Projects")
+        this.dataService.GetAll("Projects")
             .subscribe(projects => {
                 this.dataStore.projects = projects;
                 this._projects.next(this.dataStore.projects);
@@ -49,14 +49,14 @@ export class ProjectService {
     }
 
     add(project: Project) {
-        this._dataService.Add('Projects', project).subscribe(project => {
+        this.dataService.Add('Projects', project).subscribe(project => {
             this.dataStore.projects.push(project);
             this._projects.next(this.dataStore.projects);
         }, error => console.log(error));
     }
 
     update(project: Project) {
-        this._dataService.Update('Projects', project.projectId, project).subscribe((project: Project) => {
+        this.dataService.Update('Projects', project.projectId, project).subscribe((project: Project) => {
             this.dataStore.projects.forEach((m, i) => {
                 if (m.projectId === project.projectId) { this.dataStore.projects[i] = project; }
             });
@@ -65,7 +65,7 @@ export class ProjectService {
     }
 
     delete(projectId: number) {
-        this._dataService.Delete('Projects', projectId).subscribe(response => {
+        this.dataService.Delete('Projects', projectId).subscribe(response => {
             this.dataStore.projects.forEach((m, i) => {
                 if (m.projectId === projectId) { this.dataStore.projects.splice(i, 1); }
             });
@@ -73,7 +73,7 @@ export class ProjectService {
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService) {
+    constructor(private dataService: DataService) {
         this.initEditProject();
         this.dataStore = { projects: [] };
         // Get the list of projects

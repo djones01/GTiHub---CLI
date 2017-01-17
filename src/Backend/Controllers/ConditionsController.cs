@@ -24,7 +24,7 @@
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var condition = this._dbContext.Conditions.FirstOrDefault(x => x.ConditionId == id);
+            var condition = this._dbContext.Conditions.Find(id);
             if (condition == null) return this.NotFound();
 
             this._dbContext.Conditions.Remove(condition);
@@ -43,7 +43,7 @@
         [HttpGet("{id}", Name = "GetCondition")]
         public IActionResult Get(int id)
         {
-            var condition = this._dbContext.Conditions.FirstOrDefault(x => x.ConditionId == id);
+            var condition = this._dbContext.Conditions.Find(id);
             if (condition == null) return this.NotFound();
 
             return new ObjectResult(condition);
@@ -66,7 +66,7 @@
         {
             if ((condition == null) || (condition.ConditionId != id)) return this.BadRequest();
 
-            var updatedCondition = this._dbContext.Conditions.FirstOrDefault(x => x.ConditionId == id);
+            var updatedCondition = this._dbContext.Conditions.Find(id);
 
             if (updatedCondition == null) return this.NotFound();
 

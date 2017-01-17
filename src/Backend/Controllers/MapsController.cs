@@ -25,7 +25,7 @@
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var map = this._dbContext.Maps.FirstOrDefault(x => x.MapId == id);
+            var map = this._dbContext.Maps.Find(id);
             if (map == null) return this.NotFound();
 
             this._dbContext.Maps.Remove(map);
@@ -44,7 +44,7 @@
         [HttpGet("{id}", Name = "GetMap")]
         public IActionResult Get(int id)
         {
-            var map = this._dbContext.Maps.FirstOrDefault(x => x.MapId == id);
+            var map = this._dbContext.Maps.Find(id);
             if (map == null) return this.NotFound();
 
             return new ObjectResult(map);
@@ -134,7 +134,7 @@
         {
             if ((map == null) || (map.MapId != id)) return this.BadRequest();
 
-            var updatedMap = this._dbContext.Maps.FirstOrDefault(x => x.MapId == id);
+            var updatedMap = this._dbContext.Maps.Find(id);
 
             if (updatedMap == null) return this.NotFound();   
 

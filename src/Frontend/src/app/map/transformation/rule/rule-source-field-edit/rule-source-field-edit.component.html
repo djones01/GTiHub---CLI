@@ -1,6 +1,9 @@
 <form [formGroup]="ruleSrcFldForm">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">                   
+            <p-inputSwitch onLabel="Trim" offLabel="No Trim" formControlName="trim"></p-inputSwitch>
+        </div>
+        <div class="col-md-2">
             <input type="text" class="form-control" placeholder="Prepend Value" formControlName="prepend" />
         </div>
         <div class="col-md-3">
@@ -9,12 +12,11 @@
                 Source Field is required
             </small>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <input type="text" class="form-control" placeholder="Append Value" formControlName="append" />
         </div>
-        <div *ngIf="ruleSrcFldForm.controls.sourceField.value != null" class="col-md-3">
+        <div *ngIf="ruleSrcFldForm.controls.sourceField.value != null" class="col-md-2">
             <field-format [fieldDataType]="ruleSrcFldForm.controls.sourceField.value.datatype"></field-format>
-            <!-- <input class="form-control" type="text" [(ngModel)]="ruleSourceField.custom_Format" name="custom_Format" #custom_Format="ngModel" placeholder="Custom Format" /> -->
         </div>
     </div>
 </form>

@@ -3,6 +3,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 import { Source, SourceField } from "./source";
 import { DataService } from "../shared/data/data.module";
+import { AlertService } from "../shared/alert/alert.module";
 
 @Injectable()
 export class SourceService {
@@ -16,7 +17,7 @@ export class SourceService {
     };
 
     loadall() {
-        this._dataService.GetAll("Sources")
+        this.dataService.GetAll("Sources")
             .subscribe(sources => {
                 this.dataStore.sources = sources;
                 this._sources.next(this.dataStore.sources);
@@ -24,7 +25,7 @@ export class SourceService {
     }
 
     getSourceFields(sourceId: number): Observable<SourceField[]> {
-        return this._dataService.Get("Sources/GetSourceFieldsbySource", sourceId);
+        return this.dataService.Get("Sources/GetSourceFieldsbySource", sourceId);
     }
 
     setEditSource(edit: Source) {
@@ -42,31 +43,34 @@ export class SourceService {
     }
 
     add(source: Source) {
-        this._dataService.Add('Sources', source).subscribe(source => {
+        this.dataService.Add('Sources', source).subscribe((source: Source) => {
             this.dataStore.sources.push(source);
-            this._sources.next(this.dataStore.sources);
+            this._sources.next(this.dataStore.sources);           
+            this.alertService.success("Successfully Added Source", "The Source '" + source.name + "' was successfully added to the list of Sources");
         }, error => console.log(error));
     }
 
     update(source: Source) {
-        this._dataService.Update('Sources', source.sourceId, source).subscribe((source: Source) => {
+        this.dataService.Update('Sources', source.sourceId, source).subscribe((source: Source) => {
             this.dataStore.sources.forEach((m, i) => {
                 if (m.sourceId === source.sourceId) { this.dataStore.sources[i] = source; }
             });
             this._sources.next(this.dataStore.sources);
+            this.alertService.success("Successfully Updated Source", "The Source '" + source.name + "' was successfully updated");
         }, error => console.log(error));
     }
 
     delete(sourceId: number) {
-        this._dataService.Delete('Sources', sourceId).subscribe(response => {
+        this.dataService.Delete('Sources', sourceId).subscribe(response => {
             this.dataStore.sources.forEach((m, i) => {
                 if (m.sourceId === sourceId) { this.dataStore.sources.splice(i, 1); }
             });
             this._sources.next(this.dataStore.sources);
+            this.alertService.success("Successfully Deleted Source", "The Source with ID" + sourceId + " was successfully deleted");
         }, error => console.log(error));
     }
 
-    constructor(private _dataService: DataService) {
+    constructor(private dataService: DataService, private alertService: AlertService) {
         this.dataStore = { sources: [] };
         // Get the list of sources
         this.loadall();

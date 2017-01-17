@@ -1,4 +1,5 @@
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { AppSettings } from "../../app-settings";
 
 @Component({
   selector: 'field-extractor',
@@ -8,7 +9,9 @@ import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 })
 export class FieldExtractorComponent implements OnInit {
   private delimiter: string = "";
+  private fieldRow: number = 1;
   public onExtracted = new EventEmitter();
+  public api_url: string = this.appSettings.api_url;
 
   onFileUpload(event) {
       let xhr = event.xhr;
@@ -29,7 +32,7 @@ export class FieldExtractorComponent implements OnInit {
       formdata.append("delimiter", this.delimiter);
   }
 
-  constructor() { }
+  constructor(private appSettings: AppSettings) { }
 
   ngOnInit() {
   }

@@ -24,19 +24,19 @@
     <hr *ngIf="ruleForm.controls.rule_Operation.value != ''">
     <p-panel *ngIf="ruleForm.controls.rule_Operation.value != ''" header="Add / Edit Rule Values" [toggleable]="true">
       <div *ngIf="ruleForm.controls.rule_Operation.value == 'sfield'">
-                <div formArrayName="ruleSourceFields">
-                    <div *ngFor="let ruleSourceField of ruleForm.controls.ruleSourceFields.controls; let i=index">
-                        <div class="row">
+                <div *ngIf="ruleForm.controls.ruleSourceFields.length > 0">
+                    <div formArrayName="ruleSourceFields" >
+                        <div class="row" *ngFor="let ruleSourceField of ruleForm.controls.ruleSourceFields.controls; let i=index">
                             <div class="col-md-11">
                                 <rule-source-field-edit [group]="ruleForm.controls.ruleSourceFields.controls[i]"></rule-source-field-edit>
                             </div>
                             <div class="col-md-1">
                                 <button type="button" class="btn btn-default" (click)="removeRuleSrcFld(i)"><span class="fa fa-trash-o"></span></button>
                             </div>
-                        </div>
-                    </div>  
-                </div>
-                <hr *ngIf="ruleForm.controls.ruleSourceFields.length > 0" />
+                        </div> 
+                    </div>
+                    <hr>
+                </div>             
                 <button type="button" (click)="addRuleSrcFld()" class="btn btn-default"><span class="fa fa-plus"></span> Add Rule Source Field</button>
             </div>
             <!-- Show for assign op -->

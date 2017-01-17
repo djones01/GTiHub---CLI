@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 
 // third party imports
-import { MenuModule, MenuItem } from 'primeng/primeng';
+import { PanelMenuModule, MenuItem } from 'primeng/primeng';
 import { SidebarModule } from 'ng-sidebar';
 
 // components
@@ -16,7 +16,7 @@ import { AboutComponent } from '../about/about.component';
     CommonModule,
     HomeRoutingModule,
     SidebarModule,
-    MenuModule
+    PanelMenuModule
   ],
   declarations: [HomeComponent, OverviewComponent, AboutComponent],
   exports: [HomeComponent]

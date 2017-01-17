@@ -35,6 +35,7 @@ export interface IRule {
 }
 
 export interface IRuleSourceField {
+    trim: boolean,
     seqNum: number;
     append?: string;
     prepend?: string;
@@ -84,6 +85,7 @@ export class Rule implements IRule {
 
 export class RuleSourceField implements IRuleSourceField {
     constructor(
+        public trim: boolean,
         public seqNum: number,
         public sourceField: SourceField,
         public append?: string,
