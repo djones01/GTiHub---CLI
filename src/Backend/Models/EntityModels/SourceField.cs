@@ -1,5 +1,6 @@
 ﻿namespace Backend.Models.EntityModels
 {
+    using HelperModels;
     #region
 
     using System.Collections.Generic;
@@ -8,17 +9,10 @@
 
     #endregion
 
-    public class SourceField : Entity
+    public class SourceField : Entity, IGenericField
     {
         public SourceField() { }
-        public SourceField(string name, string datatype, bool active, int seqnum)
-        {
-            this.Name = name;
-            this.Datatype = datatype;
-            this.Active = active;
-            this.SeqNum = seqnum;
-        }
-
+       
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SourceFieldId { get; set; }

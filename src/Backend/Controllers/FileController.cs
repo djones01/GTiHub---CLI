@@ -13,51 +13,119 @@
     using Microsoft.AspNetCore.Mvc;
     using Backend.Models.EntityModels;
     using Helpers;
+    using Helpers.FileMapping;
+    using Microsoft.Extensions.Logging;
+
+    using Serilog;
 
     #endregion
 
     [Route("api/[controller]")]
     public class FileController : Controller
     {
-        private readonly ITransformHelpers _helpers;
+        private readonly ITransformHelpers _transformHelpers;
+        private readonly IFileHelpers _fileHelpers;
 
-        public FileController(ITransformHelpers _helpers)
+        public FileController(ITransformHelpers transformHelpers, IFileHelpers fileHelpers)
         {
-            this._helpers = _helpers;
+            this._transformHelpers = transformHelpers;
+            this._fileHelpers = fileHelpers;
         }
 
         [Route("ExtractFields")]
         [HttpPost]
-        public async Task<IActionResult> ExtractFields(IFormCollection form)
+        public async Task<IActionResult> ExtractFieldsSingle(IFormCollection form)
         {
             if (!this.Request.ContentType.Contains("multipart/form-data")) return new UnsupportedMediaTypeResult();
 
-            var file = form.Files[0];
-            if (file == null) throw new Exception("File is null");
-            if (file.Length == 0) throw new Exception("File is empty");
-            if ((file.ContentType != "text/csv") && (file.ContentType != "text/plain")
-                && (file.ContentType != "application/octet-stream") && (file.ContentType != "application/vnd.ms-excel")) return new UnsupportedMediaTypeResult();
-
-            var sfields = new List<SourceField>();
-            var sfieldSeqCount = 1;
-
             try
             {
-                using (var reader = new StreamReader(file.OpenReadStream()))
+                _fileHelpers.CheckFilesValid(form.Files);
+                var delimiter = Convert.ToChar(form["delimiter"]);
+                var fieldRow = Convert.ToInt32(form["fieldRow"]);
+                if (!Char.IsWhiteSpace(delimiter) && fieldRow > 0)
                 {
-                    var line = await reader.ReadLineAsync();
+                    var fields = await _fileHelpers.ExtractFieldsSingle(form.Files[0], delimiter, fieldRow);
 
-                    var delimiter = Convert.ToChar(form["delimiter"]);
-
-                    var fields = line.Split(delimiter);
-                    foreach (var field in fields) sfields.Add(new SourceField(field, "text", true, sfieldSeqCount++));
+                    return new ObjectResult(fields);
                 }
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "Extracting sources in batch mode failed");
+                if (ex is InvalidDataException)
+                {
+                    Log.Error("Format of file invalid");
+                }
             }
 
-            return new ObjectResult(sfields);
+            return new BadRequestResult();
+        }
+
+        [Route("ExtractSourcesBatch")]
+        [HttpPost]
+        public async Task<IActionResult> ExtractSourcesBatch(IFormCollection form)
+        {
+            if (!this.Request.ContentType.Contains("multipart/form-data")) return new UnsupportedMediaTypeResult();
+
+            try
+            {
+                _fileHelpers.CheckFilesValid(form.Files);
+                var delimiters = Convert.ToString(form["delimiter[]"]);
+                var extractFieldsByFiles = Convert.ToString(form["extractFieldsByFile[]"]);
+                if (!String.IsNullOrWhiteSpace(delimiters) && !String.IsNullOrWhiteSpace(extractFieldsByFiles))
+                {
+                    var delimitersList = delimiters.Split(',').Select(x => Convert.ToChar(x)).ToList();
+                    var extractFieldsByFilesList = extractFieldsByFiles.Split(',').Select(x => bool.Parse(x)).ToList();
+
+                    List<Source> sources = await _fileHelpers.ExtractSourcesBatch(form.Files, delimitersList, extractFieldsByFilesList);
+
+                    return new ObjectResult(sources);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Extracting sources in batch mode failed");
+                if (ex is InvalidDataException)
+                {
+                    Log.Error("Format of file invalid");
+                }
+            }
+
+            return new BadRequestResult();
+        }
+
+        [Route("ExtractTargetsBatch")]
+        [HttpPost]
+        public async Task<IActionResult> ExtractTargetsBatch(IFormCollection form)
+        {
+            if (!this.Request.ContentType.Contains("multipart/form-data")) return new UnsupportedMediaTypeResult();
+
+            try
+            {
+                _fileHelpers.CheckFilesValid(form.Files);
+                var delimiters = Convert.ToString(form["delimiter[]"]);
+                var extractFieldsByFiles = Convert.ToString(form["extractFieldsByFile[]"]);
+                if (!String.IsNullOrWhiteSpace(delimiters) && !String.IsNullOrWhiteSpace(extractFieldsByFiles))
+                {
+                    var delimitersList = delimiters.Split(',').Select(x => Convert.ToChar(x)).ToList();
+                    var extractFieldsByFilesList = extractFieldsByFiles.Split(',').Select(x => bool.Parse(x)).ToList();
+
+                    List<Target> targets = await _fileHelpers.ExtractTargetsBatch(form.Files, delimitersList, extractFieldsByFilesList);
+
+                    return new ObjectResult(targets);
+                }          
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex, "Extracting targets in batch mode failed");
+                if(ex is InvalidDataException)
+                {
+                    Log.Error("Format of file invalid");
+                }
+            }
+
+            return new BadRequestResult();
         }
 
         [Route("RunMapping")]
@@ -75,16 +143,16 @@
 
                 var success = false;
 
-                this._helpers.SetLogFile(form["mapId"]);
+                this._transformHelpers.SetLogFile(form["mapId"]);
 
                 // Get formatted data from the uploaded files
-                var sourceTables = await Task.Run(() => this._helpers.GetSourceTables(form));
+                var sourceTables = await Task.Run(() => this._transformHelpers.GetSourceTables(form));
 
                 // Get list of transformations for map
-                var transformations = await Task.Run(() => this._helpers.GetMapTransformations(mapId));
+                var transformations = await Task.Run(() => this._transformHelpers.GetMapTransformations(mapId));
 
                 // Get the id of the primary source
-                var primarySourceId = await Task.Run(() => this._helpers.GetPrimarySourceId(ref form));
+                var primarySourceId = await Task.Run(() => this._transformHelpers.GetPrimarySourceId(ref form));
 
                 // Get field counts for primary table
                 var lineCount = sourceTables[primarySourceId].SourceVals.Length;
@@ -95,7 +163,7 @@
                     await
                         Task.Run(
                             () =>
-                                this._helpers.GetTargetTables(
+                                this._transformHelpers.GetTargetTables(
                                     ref transformations,
                                     primarySourceId,
                                     lineCount,
@@ -108,7 +176,7 @@
                     await
                         Task.Run(
                             () =>
-                                this._helpers.TransformMapToFile(
+                                this._transformHelpers.TransformMapToFile(
                                     ref sourceTables,
                                     ref targetTables,
                                     ref transformations,
@@ -119,7 +187,7 @@
                                     evalConditions));
 
                 // Create new memory stream to return
-                bytes = this._helpers.GetTargetBytes(ref targetTables, targetId, outputDelimiter);
+                bytes = this._transformHelpers.GetTargetBytes(ref targetTables, targetId, outputDelimiter);
 
                 // return result;    
             }

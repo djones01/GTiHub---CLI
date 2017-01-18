@@ -30,6 +30,7 @@ export class FieldExtractorComponent implements OnInit {
   onBeforeFileUpload(event){
       let formdata = event.formData;
       formdata.append("delimiter", this.delimiter);
+      formdata.append("fieldRow", this.fieldRow);
   }
 
   constructor(private appSettings: AppSettings) { }

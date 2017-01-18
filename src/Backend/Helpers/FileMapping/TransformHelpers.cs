@@ -61,7 +61,7 @@
             int lineCount,
             int primaryFieldCount);
 
-        Task<string[]> ReadAllLinesAsync(StreamReader reader, Encoding encoding);
+        Task<string[]> ReadAllLinesAsync(IFormFile file);
 
         // Logging methods
         void SetLogFile(string fileName);
@@ -393,51 +393,46 @@
                             var firstRowIsHeader = Convert.ToBoolean(form["firstRowHeader-" + sourceId]);
                             var altHeadRow = 0;
                             if (!firstRowIsHeader) altHeadRow = Convert.ToInt32(form["altHeadRow-" + sourceId]) - 1;
+                         
+                            Log.Information(
+                                "Begin reading lines from file with Source Id: {SourceId}",
+                                sourceId);
+                            var lines = await this.ReadAllLinesAsync(file);
+                            Log.Information(
+                                "Finished reading lines from file with Source Id: {SourceId}",
+                                sourceId);
 
-                            using (var buffer = new BufferedStream(file.OpenReadStream()))
+                            string[] splitline;
+
+                            // Get the number of header fields
+                            splitline =
+                                lines[altHeadRow++].Trim()
+                                    .Replace("\r", string.Empty)
+                                    .Replace("\n", string.Empty)
+                                    .Split(delimiter);
+                            var headerCount = splitline.Length;
+                            var adjustedLineCount = lines.Length - altHeadRow;
+
+                            var sourceTable = new string[adjustedLineCount][];
+
+                            // Initialize inner string array
+                            for (var z = 0; z < adjustedLineCount; z++) sourceTable[z] = new string[headerCount];
+
+                            for (var z = 0; z < headerCount; z++) sourceFields.Add(splitline[z], z);
+
+                            // Get the data from the file and put it in string array, start reading at altHeadRow
+                            for (var i = 0; i < adjustedLineCount; i++)
                             {
-                                using (var reader = new StreamReader(buffer))
-                                {
-                                    Log.Information(
-                                        "Begin reading lines from file with Source Id: {SourceId}",
-                                        sourceId);
-                                    var lines = await this.ReadAllLinesAsync(reader, Encoding.UTF8);
-                                    Log.Information(
-                                        "Finished reading lines from file with Source Id: {SourceId}",
-                                        sourceId);
-
-                                    string[] splitline;
-
-                                    // Get the number of header fields
-                                    splitline =
-                                        lines[altHeadRow++].Trim()
-                                            .Replace("\r", string.Empty)
-                                            .Replace("\n", string.Empty)
-                                            .Split(delimiter);
-                                    var headerCount = splitline.Length;
-                                    var adjustedLineCount = lines.Length - altHeadRow;
-
-                                    var sourceTable = new string[adjustedLineCount][];
-
-                                    // Initialize inner string array
-                                    for (var z = 0; z < adjustedLineCount; z++) sourceTable[z] = new string[headerCount];
-
-                                    for (var z = 0; z < headerCount; z++) sourceFields.Add(splitline[z], z);
-
-                                    // Get the data from the file and put it in string array, start reading at altHeadRow
-                                    for (var i = 0; i < adjustedLineCount; i++)
-                                    {
-                                        splitline =
-                                            lines[altHeadRow++].Trim()
-                                                .Replace("\r", string.Empty)
-                                                .Replace("\n", string.Empty)
-                                                .Split(delimiter);
-                                        for (var j = 0; j < headerCount; j++) sourceTable[i][j] = splitline[j];
-                                    }
-
-                                    sourcesVals.Add(sourceId, new SourceInfo(sourceFields, sourceTable));
-                                }
+                                splitline =
+                                    lines[altHeadRow++].Trim()
+                                        .Replace("\r", string.Empty)
+                                        .Replace("\n", string.Empty)
+                                        .Split(delimiter);
+                                for (var j = 0; j < headerCount; j++) sourceTable[i][j] = splitline[j];
                             }
+
+                            sourcesVals.Add(sourceId, new SourceInfo(sourceFields, sourceTable));
+                         
                         });
             }
             catch (Exception ex)
@@ -534,16 +529,19 @@
         /// <param name="reader"></param>
         /// <param name="encoding"></param>
         /// <returns>An array containing all lines read from a file</returns>
-        public async Task<string[]> ReadAllLinesAsync(StreamReader reader, Encoding encoding)
+        public async Task<string[]> ReadAllLinesAsync(IFormFile file)
         {
             var lines = new List<string>();
 
             try
             {
-                using (var rdr = reader)
+                using (var buffer = new BufferedStream(file.OpenReadStream()))
                 {
-                    string line;
-                    while ((line = await rdr.ReadLineAsync()) != null) lines.Add(line);
+                    using (var reader = new StreamReader(buffer))
+                    {
+                        string line;
+                        while ((line = await reader.ReadLineAsync()) != null) lines.Add(line);
+                    }
                 }
             }
             catch (Exception ex)

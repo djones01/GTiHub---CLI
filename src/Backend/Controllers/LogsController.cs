@@ -16,7 +16,7 @@ namespace Backend.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            this.
+            return null;
         }
 
         // GET api/values/5

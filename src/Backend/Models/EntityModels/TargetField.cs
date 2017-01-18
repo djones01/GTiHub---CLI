@@ -1,5 +1,6 @@
 ﻿namespace Backend.Models.EntityModels
 {
+    using HelperModels;
     #region
 
     using System.Collections.Generic;
@@ -8,7 +9,7 @@
 
     #endregion
 
-    public class TargetField : Entity
+    public class TargetField : Entity, IGenericField
     {
         public TargetField() { }
 

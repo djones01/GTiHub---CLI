@@ -13,6 +13,8 @@ using Backend.Helpers;
 using Backend.Models.EntityModels;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Backend.Helpers.FileMapping;
+using Serilog;
 
 namespace Backend
 {
@@ -31,10 +33,18 @@ namespace Backend
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
+            // Create general logger for the application
+            Log.Logger = new LoggerConfiguration().WriteTo.RollingFile(
+                        env.ContentRootPath + "/Logs/app.log",
+                        outputTemplate:
+                        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {SourceContext} [{Level}] {Message}{NewLine}{Exception}")
+                    .CreateLogger();
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
+        private readonly object _hostingEnvironment;
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -68,6 +78,7 @@ namespace Backend
             // Add the TransformHelpers service
             services.TryAddTransient<IProjectHelpers, ProjectHelpers>();
             services.TryAddTransient<ITransformHelpers, TransformHelpers>();
+            services.TryAddTransient<IFileHelpers, FileHelpers>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
