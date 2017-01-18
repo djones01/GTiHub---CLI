@@ -60,7 +60,7 @@
 
             this._dbContext.Projects.Add(newProject);
 
-            // Add Maps, Sources, and Targets
+            // Add Maps, Sources, and Targets 
             foreach (var map in project.Maps)
             {
                 this._dbContext.ProjectMaps.Add(new ProjectMap(newProject, map));

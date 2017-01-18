@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { Source } from "../source";
 import { SourceService } from "../source.service";
@@ -8,7 +8,7 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   selector: 'source-list',
   templateUrl: './source-list.component.html',
   styleUrls: ['./source-list.component.css'],
-  inputs: ['showFooterOptions', 'showHeader', 'emitSelected'],
+  inputs: ['showFooterOptions', 'showHeader', 'emitSelected', 'selectedSources'],
   outputs: ['onSelectedSourcesChange']
 })
 export class SourceListComponent implements OnInit {
@@ -21,7 +21,8 @@ export class SourceListComponent implements OnInit {
     private canDelete = false;
     private canEdit = false;
     private sources: Source[];
-    private selectedSources: Source[] = [];
+
+    @Input() selectedSources: Source[] = [];
 
     private columnOptions: SelectItem[];
     private cols = [

@@ -8,11 +8,14 @@ import { ConfirmationService, SelectItem } from "primeng/primeng";
   selector: 'source-list',
   templateUrl: './source-list.component.html',
   styleUrls: ['./source-list.component.css'],
-  inputs: ['showFooterOptions'],
+  inputs: ['showFooterOptions', 'showHeader', 'emitSelected'],
   outputs: ['onSelectedSourcesChange']
 })
 export class SourceListComponent implements OnInit {
-    public howFooterOptions: boolean = true;
+    public emitSelected: boolean = false;
+    public showHeader: boolean = true;
+    public showFooterOptions: boolean = true;
+
     public onSelectedSourcesChange = new EventEmitter();
     private showDialog = false;
     private canDelete = false;
@@ -61,7 +64,8 @@ export class SourceListComponent implements OnInit {
             this.canEdit = true;
         }
 
-        this.onSelectedSourcesChange.emit(this.selectedSources);
+        if(this.emitSelected)
+            this.onSelectedSourcesChange.emit(this.selectedSources);
     }
     onRowUnselect(event) {
         if (this.selectedSources.length == 1) {
@@ -72,7 +76,8 @@ export class SourceListComponent implements OnInit {
             this.canEdit = false;
         }
 
-        this.onSelectedSourcesChange.emit(this.selectedSources);
+        if(this.emitSelected)
+            this.onSelectedSourcesChange.emit(this.selectedSources);
     }
 
     constructor(private confirmationService: ConfirmationService, private router: Router, private sourceService: SourceService) { }

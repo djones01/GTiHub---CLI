@@ -50,5 +50,18 @@ namespace Backend.Helpers
 
             return projectViewModel; ;
         }
+
+        public Source CopySourceinContext()
+        {
+            this._dbContext.
+        }
+        public Target CopyTargetinContext()
+        {
+
+        }
+        public Map CopyMapinContext()
+        {
+
+        }
     }
 }

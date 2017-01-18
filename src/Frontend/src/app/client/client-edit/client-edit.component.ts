@@ -12,8 +12,7 @@ export class ClientEditComponent implements OnInit {
 clientForm: FormGroup;
     client: Client;
 
-    onSubmit(client: Client) {
-        Object.assign(this.client, client);
+    onSubmit(client: Client){
         this.clientService.submit(this.client);
         this.reset();
     }

@@ -10,6 +10,7 @@ namespace Backend.Helpers.FileMapping
         public bool CheckIsType(string value, string dataType)
         {
 
+            return false;
         }
     }
 }
