@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { Map } from "../map";
 import { MapService } from "../services/map.service";
@@ -24,7 +24,8 @@ export class MapListComponent implements OnInit {
     private canDelete = false;
     private canEdit = false;
     private maps: Map[];
-    private selectedMaps: Map[] = [];
+
+    @Input() selectedMaps: Map[] = [];
 
     private columnOptions: SelectItem[];
     private cols = [

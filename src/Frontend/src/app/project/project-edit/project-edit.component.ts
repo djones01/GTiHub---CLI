@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Project } from "../project";
+import { ProjectViewModel } from "../project";
 import { ProjectService } from "../project.service";
 import { ClientService } from "../../client/client.module";
 
@@ -11,7 +11,7 @@ import { ClientService } from "../../client/client.module";
 })
 export class ProjectEditComponent implements OnInit {
     projectForm: FormGroup;
-    project: Project;
+    project: ProjectViewModel;
 
     public project_Types = [
         { value: 'upgrade', display: 'Upgrade' },
@@ -20,8 +20,7 @@ export class ProjectEditComponent implements OnInit {
         { value: 'retrofit', display: 'Retrofit' }
     ];
 
-    onSubmit(project: Project) {
-        Object.assign(this.project, project);
+    onSubmit(project: ProjectViewModel) {
         this.projectService.submit(this.project);
         this.reset();
     }
@@ -32,6 +31,9 @@ export class ProjectEditComponent implements OnInit {
             name: ['', Validators.required],
             project_Type: ['', Validators.required],
             client: ['', Validators.required],
+            copyMaps: [false],
+            copySources: [false],
+            copyTargets: [false],
             maps: [[]],
             sources: [[]],
             targets: [[]],
@@ -47,7 +49,7 @@ export class ProjectEditComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectService.editProject.subscribe(project => {
+        this.projectService.editProject.subscribe((project: ProjectViewModel) => {
             this.project = project
             this.initProjectForm();
         });

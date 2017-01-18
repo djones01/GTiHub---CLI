@@ -17,6 +17,9 @@ namespace Backend.Models.ViewModels
         public string Project_Type { get; set; }
 
         public Client Client { get; set; }
+        public bool CopyMaps { get; set; }
+        public bool CopySources { get; set; }
+        public bool CopyTargets { get; set; }
         public ICollection<Map> Maps { get; set; }
         public ICollection<Source> Sources { get; set; }
         public ICollection<Target> Targets { get; set; }

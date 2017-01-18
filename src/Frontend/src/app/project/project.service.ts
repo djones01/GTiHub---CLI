@@ -35,7 +35,7 @@ export class ProjectService {
     }
 
     newProject() {
-        return new Project('', '', '', null);
+        return new Project('', '', '', '', [],[],[]);
     }
 
     submit(project: Project) {

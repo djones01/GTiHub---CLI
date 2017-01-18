@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Router } from "@angular/router";
 import { Target } from "../target";
 import { TargetService } from "../target.service";
@@ -21,7 +21,8 @@ export class TargetListComponent implements OnInit {
     private canDelete = false;
     private canEdit = false;
     private targets: Target[];
-    private selectedTargets: Target[] = [];
+
+    @Input() selectedTargets: Target[] = [];
 
     private columnOptions: SelectItem[];
     private cols = [
